@@ -158,6 +158,32 @@ void splitting_into_two(list* cur_list, list* copy_list) {
     }
 }
 
+
+
+void comb_lists_ahead_chosen_element(list* first_list, list* second_list) {
+
+    second_list->chosen_element = second_list->first;
+    while (second_list->chosen_element->next != nullptr) {
+        add_ahead_chosen_element(first_list, second_list->chosen_element->data);
+        move_forvard(second_list);
+        move_forvard(first_list);
+    }
+    add_ahead_chosen_element(first_list, second_list->chosen_element->data);
+}
+
+void combining_two_lists(list* first_list, list* second_list) {
+
+    first_list->chosen_element = first_list->last;
+    comb_lists_ahead_chosen_element(first_list, second_list);
+    /*
+    second_list->chosen_element = second_list->first;
+    while (second_list->chosen_element->next != nullptr) {
+        pushback(first_list, second_list->chosen_element->data);
+        move_forvard(second_list);
+    }*/
+}
+
+
 int main()
 {
     list l;
@@ -172,19 +198,24 @@ int main()
     pushback(&l, 77);
     pushback(&l, 88);
 
+    print_list(&l);
+    std::cout << "-------\n";
 
-    print_list(&l);
-    std::cout << "-------\n";
-    print_chosen_element(&l);
-    std::cout << "-------\n";
-    splitting_into_two(&l, &l_copy);
-    print_list(&l);
-    std::cout << "-------\n";
+    pushback(&l_copy, 111);
+    pushback(&l_copy, 222);
+    pushback(&l_copy, 333);
+    pushback(&l_copy, 444);
+    pushback(&l_copy, 555);
+    pushback(&l_copy, 666);
+    pushback(&l_copy, 777);
+
     print_list(&l_copy);
+    std::cout << "-------\n";
+    combining_two_lists(&l, &l_copy);
+    //comb_lists_ahead_chosen_element(&l, &l_copy);
 
+    print_list(&l);
 
-    //print_list(&l);
-    
 
     /*
     pushback(&l, 11);
@@ -201,7 +232,9 @@ int main()
     print_list(&l);
     print_list_inverse(&l);
 
-    splitting_into_two(&l);
+    splitting_into_two(&l, &l_copy);
+    combining_two_lists(&l, &l_copy);
+    comb_lists_ahead_chosen_element(&l, &l_copy);
     */
     return 0;
 }
