@@ -134,30 +134,34 @@ void add_ahead_chosen_element(list* cur_list, int data) {
     }
 }
 
-void splitting_into_two(list* cur_list) {
-    list* a = new list;
-    
-    list_item* p_tmp = cur_list->chosen_element;
-    a->chosen_element = cur_list->chosen_element->next;
-    a->chosen_element->previosly = nullptr;
-    a->first = a->chosen_element;
-
-    while (cur_list->chosen_element->next != nullptr) {
-        a->chosen_element->data = cur_list->chosen_element->data;
-        move_forvard(cur_list);
-        a->chosen_element = cur_list->chosen_element;
+void splitting_into_two(list* cur_list, list* copy_list) {
+    if (cur_list->chosen_element == cur_list->last) {
+        std::cout << "The pointer points to the last element\nI can't do anything\n";
     }
-    add_ahead_chosen_element(a, cur_list->chosen_element->data);
-    a->last = a->chosen_element;
-    a->last->next = nullptr;
-    cur_list->chosen_element = p_tmp;
-    cur_list->chosen_element->next = nullptr;
-    print_list(a);
+    else {
+        list_item* p_tmp = cur_list->chosen_element;
+        copy_list->chosen_element = cur_list->chosen_element->next;
+        copy_list->chosen_element->previosly = nullptr;
+        copy_list->first = copy_list->chosen_element;
+        move_forvard(cur_list);
+
+        while (cur_list->chosen_element->next != nullptr) {
+            copy_list->chosen_element->data = cur_list->chosen_element->data;
+            move_forvard(cur_list);
+            copy_list->chosen_element = cur_list->chosen_element;
+        }
+        add_ahead_chosen_element(copy_list, cur_list->chosen_element->data);
+        copy_list->last = copy_list->chosen_element;
+        copy_list->last->next = nullptr;
+        cur_list->chosen_element = p_tmp;
+        cur_list->chosen_element->next = nullptr;
+    }
 }
 
 int main()
 {
     list l;
+    list l_copy;
     
     pushback(&l, 11);
     pushback(&l, 22);
@@ -167,15 +171,18 @@ int main()
     pushback(&l, 66);
     pushback(&l, 77);
     pushback(&l, 88);
-    move_forvard(&l);
-    move_forvard(&l);
-    move_forvard(&l);
-    move_forvard(&l);
+
+
     print_list(&l);
     std::cout << "-------\n";
     print_chosen_element(&l);
     std::cout << "-------\n";
-    splitting_into_two(&l);
+    splitting_into_two(&l, &l_copy);
+    print_list(&l);
+    std::cout << "-------\n";
+    print_list(&l_copy);
+
+
     //print_list(&l);
     
 
