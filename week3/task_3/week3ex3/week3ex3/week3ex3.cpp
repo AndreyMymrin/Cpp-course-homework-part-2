@@ -138,18 +138,18 @@ void add_ahead_chosen_element(list* cur_list, int data) {
 int main()
 {
     list l;
-    auto& link_list = l;
+    //auto& link_list = l;
 
-    pushback(link_list, 11);
-    pushback(link_list, 22);
-    pushback(link_list, 33);
+    pushback(l, 11);
+    pushback(l, 22);
+    pushback(l, 33);
 
 
-    print_list(link_list);
+    print_list(l);
     //delete_last(&link_list);
 
     std::cout << "-------\n";
-    print_list(link_list);
+    print_list(l);
     /*
     pushback(link_list, 11);
     add_ahead_chosen_element(link_list, 666);
