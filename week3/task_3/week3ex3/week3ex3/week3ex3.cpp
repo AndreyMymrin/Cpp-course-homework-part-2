@@ -15,29 +15,30 @@ struct list {
 };
 
 
-bool is_list_empty(list* my_list) {
-    if (my_list->first == nullptr) {
+bool is_list_empty(list& my_list) {
+    if (my_list.first == nullptr) {
         return true;
     }
     return false;
 }
 
-void pushback(list* cur_list, int data) {
+void pushback(list& cur_list, int data) {
     list_item* p_tmp = new list_item(data);
+
     if (is_list_empty(cur_list)) {
-        cur_list->first = p_tmp;
-        cur_list->last = p_tmp;
-        cur_list->first->previosly = nullptr;
-        cur_list->chosen_element = p_tmp;
+        cur_list.first = p_tmp;
+        cur_list.last = p_tmp;
+        cur_list.first->previosly = nullptr;
+        cur_list.chosen_element = p_tmp;
         return;
     }
-    p_tmp->previosly = cur_list->last;
-    cur_list->last->next = p_tmp;
-    cur_list->last = p_tmp;
+    p_tmp->previosly = cur_list.last;
+    cur_list.last->next = p_tmp;
+    cur_list.last = p_tmp;
 };
 
-void print_list(list* cur_list) {
-    list_item* p_tmp = cur_list->first;
+void print_list(list& cur_list) {
+    list_item* p_tmp = cur_list.first;
     while (p_tmp != nullptr) {
         std::cout << p_tmp->data << std::endl;
         p_tmp = p_tmp->next;
@@ -137,19 +138,18 @@ void add_ahead_chosen_element(list* cur_list, int data) {
 int main()
 {
     list l;
-    auto link_list = &l;
+    auto& link_list = l;
 
     pushback(link_list, 11);
     pushback(link_list, 22);
     pushback(link_list, 33);
-    pushback(link_list, 44);
-    pushback(link_list, 55);
-    pushback(link_list, 66);
-    pushback(link_list, 77);
+
 
     print_list(link_list);
-    std::cout << "-------\n";
+    //delete_last(&link_list);
 
+    std::cout << "-------\n";
+    print_list(link_list);
     /*
     pushback(link_list, 11);
     add_ahead_chosen_element(link_list, 666);
