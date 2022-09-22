@@ -137,34 +137,34 @@ void add_ahead_chosen_element(list* cur_list, int data) {
 int main()
 {
     list l;
+    auto link_list = &l;
 
-    pushback(&l, 11);
-    pushback(&l, 22);
-    pushback(&l, 33);
-    pushback(&l, 44);
-    pushback(&l, 55);
-    pushback(&l, 66);
-    pushback(&l, 77);
-    pushback(&l, 88);
+    pushback(link_list, 11);
+    pushback(link_list, 22);
+    pushback(link_list, 33);
+    pushback(link_list, 44);
+    pushback(link_list, 55);
+    pushback(link_list, 66);
+    pushback(link_list, 77);
 
-    print_list(&l);
+    print_list(link_list);
     std::cout << "-------\n";
 
     /*
-    pushback(&l, 11);
-    add_ahead_chosen_element(&l, 666);
-    move_forvard(&l);
-    move_backvard(&l);
+    pushback(link_list, 11);
+    add_ahead_chosen_element(link_list, 666);
+    move_forvard(link_list);
+    move_backvard(link_list);
 
-    delete_chosen_element(&l);
-    delete_all_list(&l);
-    delete_last(&l);
-    delete_first(&l);
+    delete_chosen_element(link_list);
+    delete_all_list(link_list);
+    delete_last(link_list);
+    delete_first(link_list);
 
-    print_chosen_element(&l);
-    print_list_with_move_f(&l);
-    print_list(&l);
-    print_list_inverse(&l);
+    print_chosen_element(link_list);
+    print_list_with_move_f(link_list);
+    print_list(link_list);
+    print_list_inverse(link_list);
     */
     return 0;
 }
