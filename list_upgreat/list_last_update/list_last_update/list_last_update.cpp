@@ -196,6 +196,7 @@ int main()
     move_forvard(l);
     move_backvard(l);
 
+
     delete_chosen_element(l);
     delete_all_list(l);
     delete_last(l);
