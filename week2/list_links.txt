@@ -1,1 +1,1 @@
-https://github.com/AndreyMymrin/homework/blob/main/week2/list/week2ex1/week2ex1.cpp
+https://github.com/AndreyMymrin/homework/commit/ea7694d545ba3e1ce15d5a34af6b7af9c3622352
