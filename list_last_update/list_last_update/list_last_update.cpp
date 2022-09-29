@@ -12,6 +12,7 @@ struct list {
     list_item* chosen_element;
     list_item* last;
     list() : first(nullptr), chosen_element(nullptr), last(nullptr) {};
+    ~list();
 };
 
 
@@ -175,6 +176,10 @@ void combining_two_lists(list& first_list, list& second_list) {
     comb_lists_ahead_chosen_element(first_list, second_list);
 }
 
+list::~list() {
+    std::cout << "I am destructor!!!";
+    delete_all_list(*this);
+}
 
 int main()
 {
