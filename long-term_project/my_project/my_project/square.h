@@ -13,7 +13,11 @@ class square
 
 public:
 	square(point v1, point v3) :
-		vertex_first(v1), vertex_third(v3) {}
+		vertex_first(v1), vertex_third(v3) {
+		if (area() == 0) {
+			std::cout << "Something wrong in square's vertexes\n";
+		}
+	}
 
 	double area();
 	double perimeter();
