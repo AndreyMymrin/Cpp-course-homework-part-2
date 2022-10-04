@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="circle.h" />
+    <ClInclude Include="my_point.h" />
     <ClInclude Include="square.h" />
     <ClInclude Include="triangle.h" />
   </ItemGroup>

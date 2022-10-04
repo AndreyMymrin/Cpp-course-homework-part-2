@@ -1,9 +1,7 @@
 #pragma once
+#include "my_point.h"
 class square
 {
-	struct point {
-		int x, y;
-	};
 	point vertex_first, vertex_third;
 };
 

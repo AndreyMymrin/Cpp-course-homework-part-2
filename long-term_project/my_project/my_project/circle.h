@@ -1,9 +1,7 @@
 #pragma once
+#include "my_point.h"
 class circle
 {
-	struct point {
-		int x, y;
-	};
 	point centre_point;
 	int radius;
 };
