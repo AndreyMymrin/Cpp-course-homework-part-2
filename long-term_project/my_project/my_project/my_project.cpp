@@ -1,7 +1,6 @@
 ﻿#include <iostream>
 #include "triangle.h"
 #include "square.h"
-#include "my_point.h"
 #include "circle.h"
 
 namespace geometric_shapes {
@@ -12,7 +11,7 @@ namespace geometric_shapes {
 
 int main()
 {
-    circle cir_1({ 3,3 }, 1);
+    geometric_shapes::circle cir_1({ 3,3 }, 1);
     std::cout << "\tCircle\nArea: " << cir_1.area() <<
         "\nPerimeter: " << cir_1.perimeter() <<
         "\nIs inside: " << cir_1.is_point_inside({ 2.5,2.5 }) <<
