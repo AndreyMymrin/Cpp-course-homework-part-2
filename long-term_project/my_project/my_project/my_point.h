@@ -1,3 +1,5 @@
+#pragma once
 struct point {
-	int x, y;
+	double x;
+	double y;
 };

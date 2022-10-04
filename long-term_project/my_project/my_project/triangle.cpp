@@ -4,7 +4,7 @@ bool triangle::is_point_inside(point p_t) {
     triangle tr1(vertex_first, vertex_second, p_t);
     triangle tr2(vertex_second, vertex_third, p_t);
     triangle tr3(vertex_first, vertex_third, p_t);
-    if (tr1.square() + tr2.square() + tr3.square() - square() < 10e-5) 
+    if (tr1.area() + tr2.area() + tr3.area() - area() < 10e-5) 
         return 1;
     else return 0;
 }
@@ -40,7 +40,7 @@ double triangle::perimeter() {
 }
 
 
-double triangle::square(){
+double triangle::area(){
     double size_12, size_23, size_13;
     size_12 = sqrt(pow(vertex_first.x - vertex_second.x, 2) +
         pow(vertex_first.y - vertex_second.y, 2));
