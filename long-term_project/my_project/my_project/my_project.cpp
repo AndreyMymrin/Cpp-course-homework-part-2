@@ -29,9 +29,7 @@ int main()
 
 
     std::cout << "\tTriangle\n";
-    geometric_shapes::triangle trian_1({ 1,1 }, { 1,4 }, { 5,1 });
-
-    trian_1.take_vertexes();
+    geometric_shapes::triangle trian_1({ 1,1 }, { 5,1 }, { 1,4 });
 
     trian_1.print_vertexes();
     std::cout << 
