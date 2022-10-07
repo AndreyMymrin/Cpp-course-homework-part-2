@@ -37,6 +37,7 @@ int main()
         "\nPerimeter: " << trian_1.perimeter() <<
         "\nIs inside: " << trian_1.is_point_inside({ 2,2 }) <<
         "\n";
+    trian_1.take_vertexes(&trian_1.TrianPointsVector);
     for (auto i : trian_1.TrianPointsVector)
     {
         std::cout<< "(" << i.x << ";" << i.y << ") ";

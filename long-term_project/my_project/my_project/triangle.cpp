@@ -1,5 +1,15 @@
 #include "triangle.h"
 
+void geometric_shapes::triangle::take_vertexes(std::vector<point>* tpv){
+    if ((vertex_first.x - vertex_second.x) * (vertex_first.y - vertex_third.y) -
+        (vertex_first.y - vertex_second.y) * (vertex_first.x - vertex_third.x) > 0) {
+        *tpv = {vertex_first, vertex_third,vertex_second};
+    }
+    else {
+        *tpv = { vertex_first, vertex_second, vertex_third };
+    }
+}
+
 bool geometric_shapes::triangle::is_point_inside(point p_t) {
     triangle tr1(vertex_first, vertex_second, p_t);
     triangle tr2(vertex_second, vertex_third, p_t);

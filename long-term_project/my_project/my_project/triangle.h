@@ -12,27 +12,21 @@ namespace geometric_shapes {
 		point vertex_first;
 		point vertex_second;
 		point vertex_third;
-
+		
 	public:
-		std::vector<point> TrianPointsVector = { vertex_first,vertex_second,vertex_third };
-
+	std::vector<point> TrianPointsVector = { vertex_first,vertex_second,vertex_third };
+		triangle(point v1, point v2, point v3) :
+			vertex_first(v1), vertex_second(v2), vertex_third(v3) {
+			if (area() == 0) {
+				std::cout << "Something wrong in triangle's vertexes\n";
+			}
+		}
+		
+		void take_vertexes(std::vector<point>* tpv);
 		double area();
 		double perimeter();
 		void print_vertexes();
 		bool is_point_inside(point p_t);
 
-		triangle(point v1, point v2, point v3) :
-			vertex_first(v1), vertex_second(v2), vertex_third(v3) {
-			if (area() == 0) {
-					std::cout << "Something wrong in triangle's vertexes\n";
-			}
-			if ((vertex_first.x - vertex_second.x) * (vertex_first.y - vertex_third.y) -
-				(vertex_first.y - vertex_second.y) * (vertex_first.x - vertex_third.x) > 0) {
-				TrianPointsVector = { vertex_first, vertex_third,vertex_second };
-			}
-			else {
-				TrianPointsVector = { vertex_first, vertex_second, vertex_third };
-			}
-		};
 	};
 }
