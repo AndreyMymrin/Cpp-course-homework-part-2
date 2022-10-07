@@ -14,5 +14,4 @@ namespace geometric_shapes {
 			return 1;
 		else return 0;
 	}
-
 }

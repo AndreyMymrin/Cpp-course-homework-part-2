@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <vector>
 #include "triangle.h"
 #include "square.h"
 #include "circle.h"
@@ -17,7 +18,7 @@ int main()
         "\nIs inside: " << cir_1.is_point_inside({ 2.5,2.5 }) <<
         "\n ";
 
-    square squ_1({ 3,1 }, { 1,3 });
+    geometric_shapes::square squ_1({ 3,1 }, { 1,3 });
     std::cout << "\tSquare\n";
     squ_1.print_vertexes();
     std::cout <<
@@ -25,13 +26,21 @@ int main()
         "\nPerimeter: " << squ_1.perimeter() <<
         "\nIs inside: " << squ_1.is_point_inside({ 2,2 }) <<
         "\n ";
-    
+
+
     std::cout << "\tTriangle\n";
-    triangle trian_1({ 1,1 }, { 1,4 }, { 5,1 });
+    geometric_shapes::triangle trian_1({ 1,1 }, { 1,4 }, { 5,1 });
+
+    trian_1.take_vertexes();
+
     trian_1.print_vertexes();
     std::cout << 
         "Area: " << trian_1.area() <<
         "\nPerimeter: " << trian_1.perimeter() <<
         "\nIs inside: " << trian_1.is_point_inside({ 2,2 }) <<
         "\n";
+    for (auto i : trian_1.TrianPointsVector)
+    {
+        std::cout<< "(" << i.x << ";" << i.y << ") ";
+    }
 }

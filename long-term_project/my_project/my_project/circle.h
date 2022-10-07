@@ -7,6 +7,7 @@
 namespace geometric_shapes {
 	class circle
 	{
+	private:
 		point centre_point;
 		int radius;
 	public:
