@@ -1,21 +1,26 @@
 #pragma once
 #include <cmath>
 #include <iostream>
+#include<vector>
 #include "my_point.h"
 namespace geometric_shapes {
 	class square
 	{
 	private:
 		point vertex_first;
+		point vertex_second;
 		point vertex_third;
+		point vertex_fourth;
 	public:
+		std::vector<point> SquarePointsVector = { vertex_first,vertex_second,
+			vertex_third, vertex_fourth};
 		square(point v1, point v3) :
 			vertex_first(v1), vertex_third(v3) {
 			if (area() == 0) {
 				std::cout << "Something wrong in square's vertexes\n";
 			}
 		}
-
+		void take_vertexes(std::vector<point>* spv);
 		double area();
 		double perimeter();
 		void print_vertexes();

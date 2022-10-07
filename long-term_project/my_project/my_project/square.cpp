@@ -1,5 +1,16 @@
 #include "square.h"
 
+void geometric_shapes::square::take_vertexes(std::vector<point>* spv) {
+	*spv = {
+		vertex_first,
+		{0.5 * (vertex_third.x + vertex_first.x + vertex_first.y - vertex_third.y),
+		0.5 * (vertex_third.y + vertex_third.x + vertex_first.y - vertex_first.x)},
+		vertex_third,
+		{0.5 * (vertex_third.x + vertex_first.x - vertex_first.y + vertex_third.y),
+		0.5 * (vertex_third.y - vertex_third.x + vertex_first.y + vertex_first.x)} 
+	};
+}
+
 void geometric_shapes::square::print_vertexes() {
 	std::cout << 
 		"(" << vertex_first.x << ";" << vertex_first.y << ") " <<

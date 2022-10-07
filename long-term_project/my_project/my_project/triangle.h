@@ -14,7 +14,7 @@ namespace geometric_shapes {
 		point vertex_third;
 		
 	public:
-	std::vector<point> TrianPointsVector = { vertex_first,vertex_second,vertex_third };
+		std::vector<point> TrianPointsVector = { vertex_first,vertex_second,vertex_third };
 		triangle(point v1, point v2, point v3) :
 			vertex_first(v1), vertex_second(v2), vertex_third(v3) {
 			if (area() == 0) {

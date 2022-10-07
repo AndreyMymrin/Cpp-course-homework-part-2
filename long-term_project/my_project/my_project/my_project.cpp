@@ -12,23 +12,30 @@ namespace geometric_shapes {
 
 int main()
 {
+    std::cout << "\tCircle\n";
     geometric_shapes::circle cir_1({ 3,3 }, 1);
-    std::cout << "\tCircle\nArea: " << cir_1.area() <<
+    std::cout << 
+        "Area: " << cir_1.area() <<
         "\nPerimeter: " << cir_1.perimeter() <<
         "\nIs inside: " << cir_1.is_point_inside({ 2.5,2.5 }) <<
-        "\n ";
+        "\n";
 
-    geometric_shapes::square squ_1({ 3,1 }, { 1,3 });
+    
     std::cout << "\tSquare\n";
+    geometric_shapes::square squ_1({ 3,1 }, { 1,3 });
     squ_1.print_vertexes();
     std::cout <<
         "Area: " << squ_1.area() <<
         "\nPerimeter: " << squ_1.perimeter() <<
         "\nIs inside: " << squ_1.is_point_inside({ 2,2 }) <<
-        "\n ";
+        "\n";
+    squ_1.take_vertexes(&squ_1.SquarePointsVector);
+    for (auto i : squ_1.SquarePointsVector)
+    {
+        std::cout << "(" << i.x << ";" << i.y << ") ";
+    }
 
-
-    std::cout << "\tTriangle\n";
+    std::cout << "\n\tTriangle\n";
     geometric_shapes::triangle trian_1({ 1,1 }, { 5,1 }, { 1,4 });
 
     trian_1.print_vertexes();
