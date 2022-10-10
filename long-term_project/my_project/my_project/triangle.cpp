@@ -1,5 +1,11 @@
 #include "triangle.h"
 
+void geometric_shapes::triangle::move(point rad_vec) {
+    vertex_first += rad_vec;
+    vertex_second += rad_vec;
+    vertex_third += rad_vec;
+}
+
 void geometric_shapes::triangle::take_vertexes(std::vector<point>* tpv){
     if ((vertex_first.x - vertex_second.x) * (vertex_first.y - vertex_third.y) -
         (vertex_first.y - vertex_second.y) * (vertex_first.x - vertex_third.x) > 0) {

@@ -19,7 +19,8 @@ namespace geometric_shapes {
 		double area();
 		double perimeter();
 		bool is_point_inside(point p_t);
-
+		void move(point rad_vec);
+		point central_point();
 	};
 
 }

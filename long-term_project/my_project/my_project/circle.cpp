@@ -1,6 +1,12 @@
 #define _USE_MATH_DEFINES
 #include "circle.h"
 
+void geometric_shapes::circle::move(point rad_vec) {
+	centre_point += rad_vec;
+}
+point geometric_shapes::circle::central_point() {
+	return { centre_point };
+}
 double geometric_shapes::circle::area() {
 	return M_PI*radius*radius;
 }

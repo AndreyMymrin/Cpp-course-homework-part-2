@@ -1,5 +1,10 @@
 #include "square.h"
 
+void geometric_shapes::square::move(point rad_vec) {
+	vertex_first += rad_vec;
+	vertex_third += rad_vec;
+}
+
 void geometric_shapes::square::take_vertexes(std::vector<point>* spv) {
 	*spv = {
 		vertex_first,

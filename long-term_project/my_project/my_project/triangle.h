@@ -27,6 +27,6 @@ namespace geometric_shapes {
 		double perimeter();
 		void print_vertexes();
 		bool is_point_inside(point p_t);
-
+		void move(point rad_vec);
 	};
 }
