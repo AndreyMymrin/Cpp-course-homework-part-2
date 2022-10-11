@@ -8,11 +8,13 @@ struct point {
 	point operator - (point SecPoi) {
 		return { this->x - SecPoi.x, this->y - SecPoi.y };
 	}
-	void operator += (point SecPoi) {
+	point operator += (point SecPoi) {
 		*this = *this + SecPoi;
+		return *this;
 	}
-	void operator -= (point SecPoi) {
+	point operator -= (point SecPoi) {
 		*this = *this - SecPoi;
+		return *this;
 	}
 	void  print() {
 		std::cout << "(" << this->x << "; " << this->y << ")\n";

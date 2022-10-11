@@ -1,5 +1,6 @@
 #include "triangle.h"
 
+
 void geometric_shapes::triangle::move(point rad_vec) {
     vertex_first += rad_vec;
     vertex_second += rad_vec;
@@ -70,4 +71,22 @@ double geometric_shapes::triangle::area(){
     double p = 0.5 * (size_12 + size_23 + size_13);
 
     return sqrt(p*(p-size_12)*(p-size_23)*(p-size_13));
+}
+
+bool geometric_shapes::triangle::intersection_with_square(geometric_shapes::square&)
+{
+    std::vector<point> SquarePointsVector = {
+        vertex_first,
+        {0.5 * (vertex_third.x + vertex_first.x + vertex_first.y - vertex_third.y),
+        0.5 * (vertex_third.y + vertex_third.x + vertex_first.y - vertex_first.x)},
+        vertex_third,
+        {0.5 * (vertex_third.x + vertex_first.x - vertex_first.y + vertex_third.y),
+        0.5 * (vertex_third.y - vertex_third.x + vertex_first.y + vertex_first.x)}
+    };
+    int counter = 0;
+    for (point i : SquarePointsVector) {
+        counter += is_point_inside(i);
+    }
+    if (counter == 1 || counter == 2) { return 1; }
+    else return 0;
 }

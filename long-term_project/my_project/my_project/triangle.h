@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include "my_point.h"
+#include "square.h"
 
 namespace geometric_shapes {
 	class triangle
@@ -28,5 +29,7 @@ namespace geometric_shapes {
 		void print_vertexes();
 		bool is_point_inside(point p_t);
 		void move(point rad_vec);
+
+		bool intersection_with_square(square&);
 	};
 }
