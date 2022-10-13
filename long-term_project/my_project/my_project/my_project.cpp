@@ -4,11 +4,7 @@
 #include "square.h"
 #include "circle.h"
 
-namespace geometric_shapes {
-    class triangle;
-    class square;
-    class circle;
-};
+
 
 int main()
 {
@@ -22,6 +18,6 @@ int main()
     std::cout << "\tTriangle\n";
     geometric_shapes::triangle trian_1({ 0,0 }, { 6,6 }, { 7,8 });
 
-    std::cout << trian_1.intersection_with_square(&squ_1);
+    std::cout << trian_1.intersection_with_square(squ_1);
 
 }

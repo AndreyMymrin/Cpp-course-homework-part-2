@@ -4,10 +4,16 @@
 #include <vector>
 #include <iostream>
 #include "my_point.h"
-//#include "square.cpp"
+//#include "square.h"
+
+
+
+
 
 namespace geometric_shapes {
+
 	class square;
+
 	class triangle
 	{
 	private:
@@ -23,7 +29,7 @@ namespace geometric_shapes {
 				std::cout << "Something wrong in triangle's vertexes\n";
 			}
 		}
-		
+
 		void take_vertexes(std::vector<point>* tpv);
 		double area();
 		double perimeter();
@@ -31,6 +37,6 @@ namespace geometric_shapes {
 		bool is_point_inside(point p_t);
 		void move(point rad_vec);
 
-		bool intersection_with_square(square* sq);
+		bool intersection_with_square(square& sq);
 	};
 }

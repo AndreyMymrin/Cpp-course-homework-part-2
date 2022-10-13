@@ -1,4 +1,6 @@
+#include "triangle.h"
 #include "square.h"
+
 
 void geometric_shapes::square::move(point rad_vec) {
 	vertex_first += rad_vec;

@@ -1,4 +1,5 @@
 #include "triangle.h"
+#include "square.h"
 
 
 void geometric_shapes::triangle::move(point rad_vec) {
@@ -73,10 +74,11 @@ double geometric_shapes::triangle::area(){
     return sqrt(p*(p-size_12)*(p-size_23)*(p-size_13));
 }
 
-bool geometric_shapes::triangle::intersection_with_square(geometric_shapes::square* sq)
+bool geometric_shapes::triangle::intersection_with_square(geometric_shapes::square& sq)
 {
     int counter = 0;
     point pt;
+    sq.area();
     
     
     while (pow((pt-vertex_second).x,2) + pow((pt - vertex_second).y, 2) < 10e-3) {
