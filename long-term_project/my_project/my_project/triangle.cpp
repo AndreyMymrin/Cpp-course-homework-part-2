@@ -1,5 +1,6 @@
 #include "triangle.h"
 #include "square.h"
+#include "circle.h"
 
 
 void geometric_shapes::triangle::move(point rad_vec) {
@@ -77,17 +78,48 @@ double geometric_shapes::triangle::area(){
 bool geometric_shapes::triangle::intersection_with_square(geometric_shapes::square& sq)
 {
     int counter = 0;
-    point pt;
-    sq.area();
+    point pt = vertex_first;
     
-    
-    while (pow((pt-vertex_second).x,2) + pow((pt - vertex_second).y, 2) < 10e-3) {
-
-        counter += is_point_inside(pt);
-        pt += (vertex_second - vertex_first) * 10e-3;
+    while ((pt-vertex_second).distance() > 10e-3) {
+        counter += sq.is_point_inside(pt);
+        pt += (vertex_second - vertex_first) * 10e-4;  
     }
-
+    pt = vertex_first;
+    while ((pt - vertex_third).distance() > 10e-3) {
+        counter += sq.is_point_inside(pt);
+        pt += (vertex_third - vertex_first) * 10e-4;
+    }
+    pt = vertex_second;
+    while ((pt - vertex_third).distance() > 10e-3) {
+        counter += sq.is_point_inside(pt);
+        pt += (vertex_third - vertex_second) * 10e-4;
+    }
 
     if (counter != 0) { return 1; }
     else return 0;
+}
+
+bool geometric_shapes::triangle::intersection_with_circle(geometric_shapes::circle& circ)
+{
+    int counter = 0;
+    point pt = vertex_first;
+
+    while ((pt - vertex_second).distance() > 10e-3) {
+        counter += circ.is_point_inside(pt);
+        pt += (vertex_second - vertex_first) * 10e-4;
+    }
+    pt = vertex_first;
+    while ((pt - vertex_third).distance() > 10e-3) {
+        counter += circ.is_point_inside(pt);
+        pt += (vertex_third - vertex_first) * 10e-4;
+    }
+    pt = vertex_second;
+    while ((pt - vertex_third).distance() > 10e-3) {
+        counter += circ.is_point_inside(pt);
+        pt += (vertex_third - vertex_second) * 10e-4;
+    }
+
+    if (counter != 0) { return 1; }
+    else return 0;
+    
 }

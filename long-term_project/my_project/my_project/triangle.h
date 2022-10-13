@@ -13,7 +13,7 @@
 namespace geometric_shapes {
 
 	class square;
-
+	class circle;
 	class triangle
 	{
 	private:
@@ -38,5 +38,6 @@ namespace geometric_shapes {
 		void move(point rad_vec);
 
 		bool intersection_with_square(square& sq);
+		bool intersection_with_circle(circle& circ);
 	};
 }

@@ -3,10 +3,6 @@
 #include <iostream>
 #include <vector>
 #include "my_point.h"
-//#include "triangle.h"
-
-
-
 
 
 namespace geometric_shapes {
@@ -23,7 +19,8 @@ namespace geometric_shapes {
 		
 	public:
 
-	friend bool triangle::intersection_with_square(square& sq );
+		friend bool triangle::intersection_with_square(square& sq );
+
 		std::vector<point> SquarePointsVector = { vertex_first,vertex_second,
 			vertex_third, vertex_fourth};
 		square(point v1, point v3) :

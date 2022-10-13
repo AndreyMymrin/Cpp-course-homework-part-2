@@ -1,5 +1,7 @@
 #define _USE_MATH_DEFINES
+#include "triangle.h"
 #include "circle.h"
+
 
 void geometric_shapes::circle::move(point rad_vec) {
 	centre_point += rad_vec;
