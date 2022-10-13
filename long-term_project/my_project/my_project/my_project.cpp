@@ -20,14 +20,8 @@ int main()
     geometric_shapes::square squ_1({ 1,1 }, { 4,4 });
   
     std::cout << "\tTriangle\n";
-    geometric_shapes::triangle trian_1({ 8,8 }, { 5,1 }, { 2,8 });
+    geometric_shapes::triangle trian_1({ 0,0 }, { 6,6 }, { 7,8 });
 
-    //std::cout << trian_1.intersection_with_square(squ_1);
-
-    point A = { 1,2 };
-    point B = { 3,5 };
-    A += B += B;
-    A.print();
-
+    std::cout << trian_1.intersection_with_square(&squ_1);
 
 }

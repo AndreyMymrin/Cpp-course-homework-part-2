@@ -19,5 +19,9 @@ struct point {
 	void  print() {
 		std::cout << "(" << this->x << "; " << this->y << ")\n";
 	}
+	point operator * (double k) {
+		return { x * k,y * k };
+	}
+
 
 };

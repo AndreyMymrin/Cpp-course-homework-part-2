@@ -3,8 +3,10 @@
 #include <iostream>
 #include <vector>
 #include "my_point.h"
+#include "triangle.h"
 
 namespace geometric_shapes {
+	class triangle;
 	class square
 	{
 	private:
@@ -12,7 +14,10 @@ namespace geometric_shapes {
 		point vertex_second;
 		point vertex_third;
 		point vertex_fourth;
+		
 	public:
+
+	friend bool triangle::intersection_with_square(square* sq);
 		std::vector<point> SquarePointsVector = { vertex_first,vertex_second,
 			vertex_third, vertex_fourth};
 		square(point v1, point v3) :
@@ -28,9 +33,10 @@ namespace geometric_shapes {
 		bool is_point_inside(point p_t);
 		void move(point rad_vec);
 
-		friend bool intersection_with_square(square&);
+		
 	};
 }
+
 /*
 point vertex_second = { 0.5 * (vertex_third.x + vertex_first.x + vertex_first.y - vertex_third.y),
 					    0.5 * (vertex_third.y + vertex_third.x + vertex_first.y - vertex_first.x) };

@@ -73,20 +73,19 @@ double geometric_shapes::triangle::area(){
     return sqrt(p*(p-size_12)*(p-size_23)*(p-size_13));
 }
 
-bool geometric_shapes::triangle::intersection_with_square(geometric_shapes::square&)
+bool geometric_shapes::triangle::intersection_with_square(geometric_shapes::square* sq)
 {
-    std::vector<point> SquarePointsVector = {
-        vertex_first,
-        {0.5 * (vertex_third.x + vertex_first.x + vertex_first.y - vertex_third.y),
-        0.5 * (vertex_third.y + vertex_third.x + vertex_first.y - vertex_first.x)},
-        vertex_third,
-        {0.5 * (vertex_third.x + vertex_first.x - vertex_first.y + vertex_third.y),
-        0.5 * (vertex_third.y - vertex_third.x + vertex_first.y + vertex_first.x)}
-    };
     int counter = 0;
-    for (point i : SquarePointsVector) {
-        counter += is_point_inside(i);
+    point pt;
+    
+    
+    while (pow((pt-vertex_second).x,2) + pow((pt - vertex_second).y, 2) < 10e-3) {
+
+        counter += is_point_inside(pt);
+        pt += (vertex_second - vertex_first) * 10e-3;
     }
-    if (counter == 1 || counter == 2) { return 1; }
+
+
+    if (counter != 0) { return 1; }
     else return 0;
 }
