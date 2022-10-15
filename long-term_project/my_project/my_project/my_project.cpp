@@ -1,10 +1,6 @@
 ﻿#include <iostream>
 #include <vector>
-#include "triangle.h"
-#include "square.h"
-#include "circle.h"
-
-
+#include "figures.h"
 
 int main()
 {
@@ -16,9 +12,9 @@ int main()
     geometric_shapes::square squ_1({ 1,1 }, { 4,4 });
   
     std::cout << "\tTriangle\n";
-    geometric_shapes::triangle trian_1({ 0,0 },{ -3,8 }, { 6,4 } );
+    geometric_shapes::triangle trian_1({ 0,0 },{ 3,8 }, { 6,4 } );
 
-    std::cout << trian_1.intersection_with_circle(cir_1);
+    //std::cout << trian_1.intersection_with_circle(cir_1);
 
 
 }

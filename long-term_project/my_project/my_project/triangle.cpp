@@ -1,6 +1,4 @@
-#include "triangle.h"
-#include "square.h"
-#include "circle.h"
+#include "figures.h"
 
 
 void geometric_shapes::triangle::move(point rad_vec) {
@@ -77,28 +75,26 @@ double geometric_shapes::triangle::area(){
 
 bool geometric_shapes::triangle::intersection_with_square(geometric_shapes::square& sq)
 {
-    int counter = 0;
-    point pt = vertex_first;
-    
-    while ((pt-vertex_second).distance() > 10e-3) {
-        counter += sq.is_point_inside(pt);
-        pt += (vertex_second - vertex_first) * 10e-4;  
+    for (auto i : this->TrianPointsVector) {
+        if (sq.is_point_inside(i)) return 1;
     }
-    pt = vertex_first;
-    while ((pt - vertex_third).distance() > 10e-3) {
-        counter += sq.is_point_inside(pt);
-        pt += (vertex_third - vertex_first) * 10e-4;
-    }
-    pt = vertex_second;
-    while ((pt - vertex_third).distance() > 10e-3) {
-        counter += sq.is_point_inside(pt);
-        pt += (vertex_third - vertex_second) * 10e-4;
+    sq.SquarePointsVector[2] = { 0.5 * (sq.vertex_first.x + sq.vertex_first.x + sq.vertex_first.y - sq.vertex_third.y),
+                                 0.5 * (sq.vertex_third.y + sq.vertex_third.x + sq.vertex_first.y - sq.vertex_first.x)};
+    sq.SquarePointsVector[4] = { 0.5 * (sq.vertex_third.x + sq.vertex_first.x - sq.vertex_first.y + sq.vertex_third.y),
+                                 0.5 * (sq.vertex_third.y - sq.vertex_third.x + sq.vertex_first.y + sq.vertex_first.x)};
+    for (auto i : sq.SquarePointsVector) {
+        if (is_point_inside(i)) return 1;
     }
 
-    if (counter != 0) { return 1; }
-    else return 0;
+    for (int tr_coun = 1; tr_coun <= 3; tr_coun++) {
+        for (int sq_coun = 1; sq_coun <= 4; sq_coun++) {
+            if (is_cross(TrianPointsVector[tr_coun], TrianPointsVector[(tr_coun + 1) % 3],
+                sq.SquarePointsVector[sq_coun], sq.SquarePointsVector[(sq_coun + 1) % 4])) return 1;
+        }
+    }
+    return 0;
 }
-
+/*
 bool geometric_shapes::triangle::intersection_with_circle(geometric_shapes::circle& circ)
 {
     int counter = 0;
@@ -123,3 +119,4 @@ bool geometric_shapes::triangle::intersection_with_circle(geometric_shapes::circ
     else return 0;
     
 }
+*/

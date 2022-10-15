@@ -1,5 +1,4 @@
-#include "triangle.h"
-#include "square.h"
+#include "figures.h"
 
 
 void geometric_shapes::square::move(point rad_vec) {
@@ -51,4 +50,8 @@ bool geometric_shapes::square::is_point_inside(point p_t) {
 	if (abs(sq1.area() + sq2.area() + sq3.area() + sq4.area() - area()) < 10e-5 )
 		return 1;
 	else return 0;
+}
+
+bool geometric_shapes::square::intersection_with_triangle(geometric_shapes::triangle& tr) {
+	return tr.intersection_with_square(*this);
 }
