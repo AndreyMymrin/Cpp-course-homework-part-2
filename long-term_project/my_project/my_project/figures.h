@@ -35,10 +35,11 @@ namespace geometric_shapes {
 		void move(point rad_vec);
 
 		bool intersection_with_square(square& sq);
-		//bool intersection_with_circle(circle& circ);
+		bool intersection_with_triangle(triangle& tr);
+		bool intersection_with_circle(circle& circ);
 
 		//friend bool circle::intersection_with_triangle(triangle& tr);
-		friend bool square::intersection_with_triangle(triangle& tr);
+		//friend bool square::intersection_with_triangle(triangle& tr);
 	};
 
 	class circle
@@ -57,11 +58,12 @@ namespace geometric_shapes {
 		void move(point rad_vec);
 		point central_point();
 
-		//bool intersection_with_square(square& sq);
+		bool intersection_with_square(square& sq);
 		//bool intersection_with_triangle(triangle& tr);
+		bool intersection_with_circle(circle& circ);
 
 		//friend bool square::intersection_with_circle(circle& circ);
-		//friend bool triangle::intersection_with_circle(circle& circ);
+		friend bool triangle::intersection_with_circle(circle& circ);
 	};
 
 	class square
@@ -88,9 +90,10 @@ namespace geometric_shapes {
 		void move(point rad_vec);
 
 		//bool intersection_with_circle(circle& circ);
-		bool intersection_with_triangle(triangle& tr);
+		//bool intersection_with_triangle(triangle& tr);
+		bool intersection_with_square(square& sq);
 
-		//friend bool circle::intersection_with_square(square& sq);
+		friend bool circle::intersection_with_square(square& sq);
 		friend bool triangle::intersection_with_square(square& sq);
 	};
 }

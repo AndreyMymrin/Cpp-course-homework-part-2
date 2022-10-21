@@ -78,45 +78,59 @@ bool geometric_shapes::triangle::intersection_with_square(geometric_shapes::squa
     for (auto i : this->TrianPointsVector) {
         if (sq.is_point_inside(i)) return 1;
     }
-    sq.SquarePointsVector[2] = { 0.5 * (sq.vertex_first.x + sq.vertex_first.x + sq.vertex_first.y - sq.vertex_third.y),
+    sq.SquarePointsVector[1] = { 0.5 * (sq.vertex_first.x + sq.vertex_first.x + sq.vertex_first.y - sq.vertex_third.y),
                                  0.5 * (sq.vertex_third.y + sq.vertex_third.x + sq.vertex_first.y - sq.vertex_first.x)};
-    sq.SquarePointsVector[4] = { 0.5 * (sq.vertex_third.x + sq.vertex_first.x - sq.vertex_first.y + sq.vertex_third.y),
+    sq.SquarePointsVector[3] = { 0.5 * (sq.vertex_third.x + sq.vertex_first.x - sq.vertex_first.y + sq.vertex_third.y),
                                  0.5 * (sq.vertex_third.y - sq.vertex_third.x + sq.vertex_first.y + sq.vertex_first.x)};
     for (auto i : sq.SquarePointsVector) {
         if (is_point_inside(i)) return 1;
     }
 
-    for (int tr_coun = 1; tr_coun <= 3; tr_coun++) {
-        for (int sq_coun = 1; sq_coun <= 4; sq_coun++) {
+    for (int tr_coun = 0; tr_coun <= 2; tr_coun++) {
+        for (int sq_coun = 0; sq_coun <= 3; sq_coun++) {
             if (is_cross(TrianPointsVector[tr_coun], TrianPointsVector[(tr_coun + 1) % 3],
                 sq.SquarePointsVector[sq_coun], sq.SquarePointsVector[(sq_coun + 1) % 4])) return 1;
         }
     }
     return 0;
 }
-/*
-bool geometric_shapes::triangle::intersection_with_circle(geometric_shapes::circle& circ)
+
+bool geometric_shapes::triangle::intersection_with_triangle(triangle& tr)
 {
-    int counter = 0;
-    point pt = vertex_first;
-
-    while ((pt - vertex_second).distance() > 10e-3) {
-        counter += circ.is_point_inside(pt);
-        pt += (vertex_second - vertex_first) * 10e-4;
+    for (auto i : TrianPointsVector) {
+        if (tr.is_point_inside(i)) return 1;
     }
-    pt = vertex_first;
-    while ((pt - vertex_third).distance() > 10e-3) {
-        counter += circ.is_point_inside(pt);
-        pt += (vertex_third - vertex_first) * 10e-4;
-    }
-    pt = vertex_second;
-    while ((pt - vertex_third).distance() > 10e-3) {
-        counter += circ.is_point_inside(pt);
-        pt += (vertex_third - vertex_second) * 10e-4;
-    }
-
-    if (counter != 0) { return 1; }
-    else return 0;
     
+    for (auto i : tr.TrianPointsVector) {
+        if (is_point_inside(i)) return 1;
+    }
+
+    for (int tr1_coun = 0; tr1_coun <= 2; tr1_coun++) {
+        for (int tr2_coun = 0; tr2_coun <= 2; tr2_coun++) {
+            if (is_cross(TrianPointsVector[tr1_coun], TrianPointsVector[(tr1_coun + 1) % 3],
+                tr.TrianPointsVector[tr2_coun], tr.TrianPointsVector[(tr2_coun + 1) % 3])) {
+                std::cout << tr2_coun;  return 1;
+            }
+        }
+    }
+    return 0;
 }
-*/
+
+bool geometric_shapes::triangle::intersection_with_circle(circle& circ)
+{
+    for (auto i : TrianPointsVector) {
+        if (circ.is_point_inside(i)) return 1;
+    }
+    if (is_point_inside(circ.centre_point)) return 1;
+
+    for (int i = 0; i <= 2; i++) {
+        point p_1 = TrianPointsVector[i];
+        point p_2 = TrianPointsVector[(i + 1) % 3];
+        geometric_shapes::triangle t_trian(p_1, p_2, circ.centre_point);
+        if ((circ.centre_point - p_2).distance() <= sqrt(circ.radius * circ.radius + (p_1 - p_2).distance() * (p_1 - p_2).distance()) &&
+            (circ.centre_point - p_1).distance() <= sqrt(circ.radius * circ.radius + (p_1 - p_2).distance() * (p_1 - p_2).distance()) &&
+            (t_trian.area() / (p_1 - p_2).distance() < circ.radius)) return 1;
+    }
+    return 0;
+}
+

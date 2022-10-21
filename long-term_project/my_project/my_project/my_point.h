@@ -26,4 +26,5 @@ struct point {
 	double distance() {
 		return sqrt(x * x + y * y);
 	}
+
 };
