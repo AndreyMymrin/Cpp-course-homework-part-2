@@ -71,7 +71,7 @@ namespace geometric_shapes {
 		point central_point();
 
 		bool intersection_with_square(square& sq);
-		//bool intersection_with_triangle(triangle& tr);
+		bool intersection_with_triangle(triangle& tr);
 		bool intersection_with_circle(circle& circ);
 
 		friend std::ostream& operator << (std::ostream& out_stream, const geometric_shapes::circle& cir) {
@@ -110,8 +110,8 @@ namespace geometric_shapes {
 		bool is_point_inside(point p_t);
 		void move(point rad_vec);
 
-		//bool intersection_with_circle(circle& circ);
-		//bool intersection_with_triangle(triangle& tr);
+		bool intersection_with_circle(circle& circ);
+		bool intersection_with_triangle(triangle& tr);
 		bool intersection_with_square(square& sq);
 
 		friend std::ostream& operator << (std::ostream& out_stream, geometric_shapes::square& sq) {
