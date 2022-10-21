@@ -13,5 +13,10 @@ int main()
     std::cout << "\tTriangle\n";
     geometric_shapes::triangle trian_1({ 0,0 },{ 30,0 }, { 0,4 } );
 
-    std::cout << trian_1.intersection_with_circle(cir_1);
+    point A = { 1,2 };
+    point B = { 3,4 };
+    
+    std::cin >> cir_1;
+    std::cout << trian_1 << "\n" << cir_1 << "\n" << squ_1;
+
 }

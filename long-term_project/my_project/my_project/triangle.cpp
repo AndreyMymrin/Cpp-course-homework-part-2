@@ -1,6 +1,5 @@
 #include "figures.h"
 
-
 void geometric_shapes::triangle::move(point rad_vec) {
     vertex_first += rad_vec;
     vertex_second += rad_vec;
@@ -78,10 +77,10 @@ bool geometric_shapes::triangle::intersection_with_square(geometric_shapes::squa
     for (auto i : this->TrianPointsVector) {
         if (sq.is_point_inside(i)) return 1;
     }
-    sq.SquarePointsVector[1] = { 0.5 * (sq.vertex_first.x + sq.vertex_first.x + sq.vertex_first.y - sq.vertex_third.y),
+    sq.SquarePointsVector[1] = { 0.5 * (sq.vertex_third.x + sq.vertex_first.x + sq.vertex_first.y - sq.vertex_third.y),
                                  0.5 * (sq.vertex_third.y + sq.vertex_third.x + sq.vertex_first.y - sq.vertex_first.x)};
     sq.SquarePointsVector[3] = { 0.5 * (sq.vertex_third.x + sq.vertex_first.x - sq.vertex_first.y + sq.vertex_third.y),
-                                 0.5 * (sq.vertex_third.y - sq.vertex_third.x + sq.vertex_first.y + sq.vertex_first.x)};
+                                 0.5 * (sq.vertex_third.y - sq.vertex_third.x + sq.vertex_first.y + sq.vertex_first.x) };
     for (auto i : sq.SquarePointsVector) {
         if (is_point_inside(i)) return 1;
     }

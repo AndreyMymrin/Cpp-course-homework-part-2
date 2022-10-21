@@ -38,6 +38,18 @@ namespace geometric_shapes {
 		bool intersection_with_triangle(triangle& tr);
 		bool intersection_with_circle(circle& circ);
 
+		//friend std::ostream& operator << (std::ostream& out_stream, const triangle& tr);
+		friend std::ostream& operator << (std::ostream& out_stream, const geometric_shapes::triangle& tr) {
+			for (auto i : tr.TrianPointsVector) {
+				out_stream << i << " ";
+			}
+			return out_stream;
+		}
+
+		friend std::istream& operator >> (std::istream& in_stream, geometric_shapes::triangle& tr) {
+			in_stream >> tr.vertex_first >> tr.vertex_second >> tr.vertex_third;
+			return in_stream;
+		}
 		//friend bool circle::intersection_with_triangle(triangle& tr);
 		//friend bool square::intersection_with_triangle(triangle& tr);
 	};
@@ -61,6 +73,15 @@ namespace geometric_shapes {
 		bool intersection_with_square(square& sq);
 		//bool intersection_with_triangle(triangle& tr);
 		bool intersection_with_circle(circle& circ);
+
+		friend std::ostream& operator << (std::ostream& out_stream, const geometric_shapes::circle& cir) {
+			out_stream << "Central point: " << cir.centre_point << "\nRadius: " << cir.radius;
+			return out_stream;
+		}
+		friend std::istream& operator >> (std::istream& in_stream, geometric_shapes::circle& cir) {
+			in_stream >> cir.centre_point >> cir.radius;
+			return in_stream;
+		}
 
 		//friend bool square::intersection_with_circle(circle& circ);
 		friend bool triangle::intersection_with_circle(circle& circ);
@@ -93,8 +114,21 @@ namespace geometric_shapes {
 		//bool intersection_with_triangle(triangle& tr);
 		bool intersection_with_square(square& sq);
 
+		friend std::ostream& operator << (std::ostream& out_stream, geometric_shapes::square& sq) {
+			sq.SquarePointsVector[1] = { 0.5 * (sq.vertex_third.x + sq.vertex_first.x + sq.vertex_first.y - sq.vertex_third.y),
+										 0.5 * (sq.vertex_third.y + sq.vertex_third.x + sq.vertex_first.y - sq.vertex_first.x) } ;
+			sq.SquarePointsVector[3] = { 0.5 * (sq.vertex_third.x + sq.vertex_first.x - sq.vertex_first.y + sq.vertex_third.y),
+										 0.5 * (sq.vertex_third.y - sq.vertex_third.x + sq.vertex_first.y + sq.vertex_first.x) };
+			for (auto i : sq.SquarePointsVector) {
+				out_stream << i << " ";
+			}
+			return out_stream;
+		}
+		friend std::istream& operator >> (std::istream& in_stream, geometric_shapes::square& sq) {
+			in_stream >> sq.vertex_first >> sq.vertex_third;
+			return in_stream;
+		}
 		friend bool circle::intersection_with_square(square& sq);
 		friend bool triangle::intersection_with_square(square& sq);
 	};
 }
-
