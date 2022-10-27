@@ -33,9 +33,9 @@ namespace geometric_shapes {
 		bool is_point_inside(point p_t);
 		void move(point rad_vec);
 
-		bool intersection_with_square(square& sq);
-		bool intersection_with_triangle(triangle& tr);
-		bool intersection_with_circle(circle& circ);
+		bool is_intersection(square& sq);
+		bool is_intersection(triangle& tr);
+		bool is_intersection(circle& circ);
 
 		friend std::ostream& operator << (std::ostream& out_stream, triangle& tr) {
 
@@ -68,9 +68,9 @@ namespace geometric_shapes {
 		void move(point rad_vec);
 		point central_point();
 
-		bool intersection_with_square(square& sq);
-		bool intersection_with_triangle(triangle& tr);
-		bool intersection_with_circle(circle& circ);
+		bool is_intersection(square& sq);
+		bool is_intersection(triangle& tr);
+		bool is_intersection(circle& circ);
 
 		friend std::ostream& operator << (std::ostream& out_stream, const circle& cir) {
 			out_stream << "Central point: " << cir.centre_point << "\nRadius: " << cir.radius;
@@ -80,7 +80,7 @@ namespace geometric_shapes {
 			in_stream >> cir.centre_point >> cir.radius;
 			return in_stream;
 		}
-		friend bool triangle::intersection_with_circle(circle& circ);
+		friend bool triangle::is_intersection(circle& circ);
 	};
 
 	class square
@@ -104,9 +104,9 @@ namespace geometric_shapes {
 		bool is_point_inside(point p_t);
 		void move(point rad_vec);
 
-		bool intersection_with_circle(circle& circ);
-		bool intersection_with_triangle(triangle& tr);
-		bool intersection_with_square(square& sq);
+		bool is_intersection(circle& circ);
+		bool is_intersection(triangle& tr);
+		bool is_intersection(square& sq);
 
 		friend std::ostream& operator << (std::ostream& out_stream, square& sq) {
 			std::vector<point> SquarePointsVector = sq.take_vertexes();
@@ -119,7 +119,7 @@ namespace geometric_shapes {
 			in_stream >> sq.vertex_first >> sq.vertex_third;
 			return in_stream;
 		}
-		friend bool circle::intersection_with_square(square& sq);
-		friend bool triangle::intersection_with_square(square& sq);
+		friend bool circle::is_intersection(square& sq);
+		friend bool triangle::is_intersection(square& sq);
 	};
 }
