@@ -15,5 +15,14 @@ int main()
     std::cout << "\tTriangle\n";
     geometric_shapes::triangle trian_1({ 0,0 },{ 30,0 }, { 0,4 } );
     
-    std::cout << squ_1.intersection_with_square(squ_2);
+
+    for (auto i : trian_1.take_vertexes()) {
+        std::cout << i << "\n";
+    }
+    
+    trian_1.move({ 0.5, 2 });
+    for (auto i : trian_1.take_vertexes()) {
+        std::cout << i << "\n";
+    }
+    
 }

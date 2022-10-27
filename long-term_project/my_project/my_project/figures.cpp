@@ -19,14 +19,12 @@ void geometric_shapes::triangle::move(point rad_vec) {
     vertex_second += rad_vec;
     vertex_third += rad_vec;
 }
-void geometric_shapes::triangle::take_vertexes(std::vector<point>* tpv) {
+std::vector<point> geometric_shapes::triangle::take_vertexes() {
     if ((vertex_first.x - vertex_second.x) * (vertex_first.y - vertex_third.y) -
         (vertex_first.y - vertex_second.y) * (vertex_first.x - vertex_third.x) > 0) {
-        *tpv = { vertex_first, vertex_third,vertex_second };
+        return { vertex_first, vertex_third,vertex_second };
     }
-    else {
-        *tpv = { vertex_first, vertex_second, vertex_third };
-    }
+    else return { vertex_first, vertex_second, vertex_third };
 }
 
 double geometric_shapes::triangle::perimeter() {
@@ -62,8 +60,8 @@ bool geometric_shapes::triangle::is_point_inside(point p_t) {
 bool geometric_shapes::triangle::intersection_with_square(square& sq)
 {
     std::vector<point> SquarePointsVector = sq.take_vertexes();
-    
-    for (auto i : this->TrianPointsVector) {
+    std::vector<point> TrianPointsVector = take_vertexes();
+    for (auto i : TrianPointsVector) {
         if (sq.is_point_inside(i)) return 1;
     }
 
@@ -81,19 +79,21 @@ bool geometric_shapes::triangle::intersection_with_square(square& sq)
 }
 bool geometric_shapes::triangle::intersection_with_triangle(triangle& tr)
 {
-    for (auto i : TrianPointsVector) {
+    std::vector<point> TrianPointsVector1 = take_vertexes();
+    std::vector<point> TrianPointsVector2 = tr.take_vertexes();
+    for (auto i : TrianPointsVector1) {
         if (tr.is_point_inside(i)) return 1;
     }
 
-    for (auto i : tr.TrianPointsVector) {
+    for (auto i : TrianPointsVector2) {
         if (is_point_inside(i)) return 1;
     }
 
     for (int tr1_coun = 0; tr1_coun <= 2; tr1_coun++) {
         for (int tr2_coun = 0; tr2_coun <= 2; tr2_coun++) {
-            if (is_cross(TrianPointsVector[tr1_coun], TrianPointsVector[(tr1_coun + 1) % 3],
-                tr.TrianPointsVector[tr2_coun], tr.TrianPointsVector[(tr2_coun + 1) % 3])) {
-                std::cout << tr2_coun;  return 1;
+            if (is_cross(TrianPointsVector1[tr1_coun], TrianPointsVector1[(tr1_coun + 1) % 3],
+                         TrianPointsVector2[tr2_coun], TrianPointsVector2[(tr2_coun + 1) % 3])) {
+                return 1;
             }
         }
     }
@@ -101,6 +101,7 @@ bool geometric_shapes::triangle::intersection_with_triangle(triangle& tr)
 }
 bool geometric_shapes::triangle::intersection_with_circle(circle& circ)
 {
+    std::vector<point> TrianPointsVector = take_vertexes();
     for (auto i : TrianPointsVector) {
         if (circ.is_point_inside(i)) return 1;
     }
@@ -177,7 +178,7 @@ void geometric_shapes::square::move(point rad_vec) {
 }
 
 std::vector<point> geometric_shapes::square::take_vertexes() {
-    std::vector<point> spv = {
+    return {
         vertex_first,
         {0.5 * (vertex_third.x + vertex_first.x + vertex_first.y - vertex_third.y),
         0.5 * (vertex_third.y + vertex_third.x + vertex_first.y - vertex_first.x)},
@@ -185,7 +186,6 @@ std::vector<point> geometric_shapes::square::take_vertexes() {
         {0.5 * (vertex_third.x + vertex_first.x - vertex_first.y + vertex_third.y),
         0.5 * (vertex_third.y - vertex_third.x + vertex_first.y + vertex_first.x)}
     };
-    return spv;
 }
 
 double geometric_shapes::square::area() {

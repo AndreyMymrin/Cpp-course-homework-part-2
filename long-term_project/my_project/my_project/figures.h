@@ -20,14 +20,14 @@ namespace geometric_shapes {
 		point vertex_second;
 		point vertex_third;
 	public:
-		std::vector<point> TrianPointsVector = { vertex_first,vertex_second,vertex_third };
+		//std::vector<point> TrianPointsVector = { vertex_first,vertex_second,vertex_third };
 		triangle(point v1, point v2, point v3) :
 			vertex_first(v1), vertex_second(v2), vertex_third(v3) {
 			if (area() == 0) {
 				std::cout << "Something wrong in triangle's vertexes\n";
 			}
 		}
-		void take_vertexes(std::vector<point>* tpv);
+		std::vector<point> take_vertexes();
 		double area();
 		double perimeter();
 		bool is_point_inside(point p_t);
@@ -37,8 +37,10 @@ namespace geometric_shapes {
 		bool intersection_with_triangle(triangle& tr);
 		bool intersection_with_circle(circle& circ);
 
-		friend std::ostream& operator << (std::ostream& out_stream, const triangle& tr) {
-			for (auto i : tr.TrianPointsVector) {
+		friend std::ostream& operator << (std::ostream& out_stream, triangle& tr) {
+
+			std::vector<point> TrianPointsVector = tr.take_vertexes();
+			for (auto i : TrianPointsVector) {
 				out_stream << i << " ";
 			}
 			return out_stream;
