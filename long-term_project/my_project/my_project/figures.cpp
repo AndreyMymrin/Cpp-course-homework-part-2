@@ -233,3 +233,8 @@ bool geometric_shapes::square::intersection_with_square(square& sq) {
     }
     return 0;
 }
+//adwawd awdada
+//ad
+//ad
+//wa
+//d
