@@ -61,20 +61,20 @@ bool geometric_shapes::triangle::is_point_inside(point p_t) {
 }
 bool geometric_shapes::triangle::intersection_with_square(square& sq)
 {
-    sq.take_vertexes(&sq.SquarePointsVector);
-
+    std::vector<point> SquarePointsVector = sq.take_vertexes();
+    
     for (auto i : this->TrianPointsVector) {
         if (sq.is_point_inside(i)) return 1;
     }
 
-    for (auto i : sq.SquarePointsVector) {
+    for (auto i : SquarePointsVector) {
         if (is_point_inside(i)) return 1;
     }
 
     for (int tr_coun = 0; tr_coun <= 2; tr_coun++) {
         for (int sq_coun = 0; sq_coun <= 3; sq_coun++) {
             if (is_cross(TrianPointsVector[tr_coun], TrianPointsVector[(tr_coun + 1) % 3],
-                sq.SquarePointsVector[sq_coun], sq.SquarePointsVector[(sq_coun + 1) % 4])) return 1;
+                SquarePointsVector[sq_coun], SquarePointsVector[(sq_coun + 1) % 4])) return 1;
         }
     }
     return 0;
@@ -147,16 +147,16 @@ bool geometric_shapes::circle::intersection_with_circle(circle& circ) {
     return t_cir.is_point_inside(circ.centre_point);
 }
 bool geometric_shapes::circle::intersection_with_square(square& sq) {
-    sq.take_vertexes(&sq.SquarePointsVector);
+    std::vector<point> SquarePointsVector = sq.take_vertexes();
     
-    for (auto i : sq.SquarePointsVector) {
+    for (auto i : SquarePointsVector) {
         if (is_point_inside(i)) return 1;
     }
     if (sq.is_point_inside(centre_point)) return 1;
 
     for (int i = 0; i <= 3; i++) {
-        point p_1 = sq.SquarePointsVector[i];
-        point p_2 = sq.SquarePointsVector[(i + 1) % 4];
+        point p_1 = SquarePointsVector[i];
+        point p_2 = SquarePointsVector[(i + 1) % 4];
         geometric_shapes::triangle t_trian(p_1, p_2, centre_point);
         if ((centre_point - p_2).distance() <= sqrt(radius * radius + (p_1 - p_2).distance() * (p_1 - p_2).distance()) &&
             (centre_point - p_1).distance() <= sqrt(radius * radius + (p_1 - p_2).distance() * (p_1 - p_2).distance()) &&
@@ -175,8 +175,9 @@ void geometric_shapes::square::move(point rad_vec) {
     vertex_first += rad_vec;
     vertex_third += rad_vec;
 }
-void geometric_shapes::square::take_vertexes(std::vector<point>* spv) {
-    *spv = {
+
+std::vector<point> geometric_shapes::square::take_vertexes() {
+    std::vector<point> spv = {
         vertex_first,
         {0.5 * (vertex_third.x + vertex_first.x + vertex_first.y - vertex_third.y),
         0.5 * (vertex_third.y + vertex_third.x + vertex_first.y - vertex_first.x)},
@@ -184,6 +185,7 @@ void geometric_shapes::square::take_vertexes(std::vector<point>* spv) {
         {0.5 * (vertex_third.x + vertex_first.x - vertex_first.y + vertex_third.y),
         0.5 * (vertex_third.y - vertex_third.x + vertex_first.y + vertex_first.x)}
     };
+    return spv;
 }
 
 double geometric_shapes::square::area() {
@@ -194,11 +196,11 @@ double geometric_shapes::square::perimeter() {
 }
 
 bool geometric_shapes::square::is_point_inside(point p_t) {
-    take_vertexes(&SquarePointsVector);
-    triangle sq1({ vertex_first, vertex_second, p_t });
-    triangle sq2({ vertex_third, vertex_second, p_t });
-    triangle sq3({ vertex_third, vertex_fourth, p_t });
-    triangle sq4({ vertex_first, vertex_fourth, p_t });
+    std::vector<point> SquarePointsVector = take_vertexes();
+    triangle sq1({ SquarePointsVector[0], SquarePointsVector[1], p_t});
+    triangle sq2({ SquarePointsVector[2], SquarePointsVector[1], p_t});
+    triangle sq3({ SquarePointsVector[2], SquarePointsVector[3], p_t});
+    triangle sq4({ SquarePointsVector[0], SquarePointsVector[3], p_t});
     if (abs(sq1.area() + sq2.area() + sq3.area() + sq4.area() - area()) < 10e-5)
         return 1;
     else return 0;
@@ -213,28 +215,23 @@ bool geometric_shapes::square::intersection_with_triangle(triangle& tr)
 
 }
 bool geometric_shapes::square::intersection_with_square(square& sq) {
-    take_vertexes(&SquarePointsVector);
-    sq.take_vertexes(&sq.SquarePointsVector);
+    std::vector<point> SquarePointsVector1 = take_vertexes();
+    std::vector<point> SquarePointsVector2 = sq.take_vertexes();
 
 
-    for (auto i : this->SquarePointsVector) {
+    for (auto i : SquarePointsVector1) {
         if (sq.is_point_inside(i)) return 1;
     }
 
-    for (auto i : sq.SquarePointsVector) {
+    for (auto i : SquarePointsVector2) {
         if (is_point_inside(i)) return 1;
     }
 
     for (int sq1_coun = 0; sq1_coun <= 3; sq1_coun++) {
         for (int sq2_coun = 0; sq2_coun <= 3; sq2_coun++) {
-            if (is_cross(SquarePointsVector[sq1_coun], SquarePointsVector[(sq1_coun + 1) % 4],
-                sq.SquarePointsVector[sq2_coun], sq.SquarePointsVector[(sq2_coun + 1) % 4])) return 1;
+            if (is_cross(SquarePointsVector1[sq1_coun], SquarePointsVector1[(sq1_coun + 1) % 4],
+                SquarePointsVector2[sq2_coun], SquarePointsVector2[(sq2_coun + 1) % 4])) return 1;
         }
     }
     return 0;
 }
-//adwawd awdada
-//ad
-//ad
-//wa
-//d

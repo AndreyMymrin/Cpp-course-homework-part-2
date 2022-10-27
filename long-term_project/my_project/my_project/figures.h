@@ -85,19 +85,18 @@ namespace geometric_shapes {
 	{
 	private:
 		point vertex_first;
-		point vertex_second;
+
 		point vertex_third;
-		point vertex_fourth;
+
 	public:
-		std::vector<point> SquarePointsVector = { vertex_first,vertex_second,
-			vertex_third, vertex_fourth };
-		square(point v1, point v3) :
-			vertex_first(v1), vertex_third(v3) {
+		
+		square(point v1, point v2) : 
+			vertex_first(v1), vertex_third(v2) {
 			if (area() == 0) {
 				std::cout << "Something wrong in square's vertexes\n";
 			}
 		}
-		void take_vertexes(std::vector<point>* spv);
+		std::vector<point> take_vertexes();
 		double area();
 		double perimeter();
 		bool is_point_inside(point p_t);
@@ -108,8 +107,8 @@ namespace geometric_shapes {
 		bool intersection_with_square(square& sq);
 
 		friend std::ostream& operator << (std::ostream& out_stream, square& sq) {
-			sq.take_vertexes(&sq.SquarePointsVector);
-			for (auto i : sq.SquarePointsVector) {
+			std::vector<point> SquarePointsVector = sq.take_vertexes();
+			for (auto i : SquarePointsVector) {
 				out_stream << i << " ";
 			}
 			return out_stream;
