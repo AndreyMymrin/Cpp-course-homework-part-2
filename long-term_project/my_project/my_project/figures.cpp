@@ -13,15 +13,13 @@ bool geometric_shapes::is_cross(point p_1, point p_2, point p_3, point p_4)
 }
 
 
-
 void geometric_shapes::triangle::move(point rad_vec) {
     vertex_first += rad_vec;
     vertex_second += rad_vec;
     vertex_third += rad_vec;
 }
 std::vector<point> geometric_shapes::triangle::take_vertexes() {
-    if ((vertex_first.x - vertex_second.x) * (vertex_first.y - vertex_third.y) -
-        (vertex_first.y - vertex_second.y) * (vertex_first.x - vertex_third.x) > 0) {
+    if (oblique_multiplication(vertex_first,vertex_second,vertex_third) > 0) {
         return { vertex_first, vertex_third,vertex_second };
     }
     else return { vertex_first, vertex_second, vertex_third };
@@ -139,7 +137,7 @@ double geometric_shapes::circle::perimeter() {
 
 
 bool geometric_shapes::circle::is_point_inside(point p_t) {
-    if (pow(centre_point.x - p_t.x, 2) + pow(centre_point.y - p_t.y, 2) <= radius * radius)
+    if ((centre_point- p_t).distance() <= radius)
         return 1;
     else return 0;
 }

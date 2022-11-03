@@ -27,11 +27,18 @@ struct point {
 	}
 
 	friend std::ostream& operator << (std::ostream& out_stream, const point& A) {
-		out_stream << "(" << A.x << "; " << A.y << ")";
+		out_stream << "(" << A.x << "; " << A.y << ") ";
 		return out_stream;
 	}
 	friend std::istream& operator >> (std::istream& in_stream, point& A) {
 		in_stream >> A.x >> A.y;
 		return in_stream;
+	}
+
+	friend std::ostream& operator << (std::ostream& out_stream, std::vector<point>& A) {
+		for (auto i : A) {
+			out_stream << i;
+		}
+		return out_stream;
 	}
 };

@@ -13,16 +13,30 @@ namespace geometric_shapes {
 	double oblique_multiplication(point p_1, point p_2, point p_3);
 	bool is_cross(point p_1, point p_2, point p_3, point p_4);
 
-	class triangle
+	class shapes 
+	{
+
+	public:
+		virtual double area() = 0;
+		virtual double perimeter() = 0;
+		virtual bool is_point_inside(point p_t) = 0;
+		virtual void move(point rad_vec) = 0;
+		virtual bool is_intersection(square& sq) { return 0; };
+		virtual bool is_intersection(circle& sq) { return 0; };
+		virtual bool is_intersection(triangle& sq) { return 0; };
+		virtual std::vector<point> take_vertexes() { return {}; };
+	};
+
+	class triangle: public virtual shapes
 	{
 	private:
 		point vertex_first;
 		point vertex_second;
 		point vertex_third;
 	public:
-		//std::vector<point> TrianPointsVector = { vertex_first,vertex_second,vertex_third };
-		triangle(point v1, point v2, point v3) :
-			vertex_first(v1), vertex_second(v2), vertex_third(v3) {
+		
+		triangle(point v1, point v2, point v3) : 
+			vertex_first(v1), vertex_second(v2), vertex_third(v3){
 			if (area() == 0) {
 				std::cout << "Something wrong in triangle's vertexes\n";
 			}
@@ -45,19 +59,19 @@ namespace geometric_shapes {
 			}
 			return out_stream;
 		}
-
 		friend std::istream& operator >> (std::istream& in_stream, triangle& tr) {
 			in_stream >> tr.vertex_first >> tr.vertex_second >> tr.vertex_third;
 			return in_stream;
 		}
 	};
 
-	class circle
+	class circle: public virtual shapes
 	{
 	private:
 		point centre_point;
 		int radius;
 	public:
+
 		circle(point centre, int R) : centre_point(centre), radius(R) {
 			if (radius == 0)
 				std::cout << "Radius equals zero! ERROR\n";
@@ -83,11 +97,10 @@ namespace geometric_shapes {
 		friend bool triangle::is_intersection(circle& circ);
 	};
 
-	class square
+	class square: public virtual shapes
 	{
 	private:
 		point vertex_first;
-
 		point vertex_third;
 
 	public:
