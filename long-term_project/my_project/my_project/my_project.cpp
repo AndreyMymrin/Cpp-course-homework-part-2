@@ -2,20 +2,33 @@
 #include <vector>
 #include "figures.h"
 
+using namespace geometric_shapes;
+
 int main()
 {
     std::cout << "\tCircle\n";
-    geometric_shapes::circle cir_1({ 3,0 }, 2);
+    circle cir_1({ 3,0 }, 2);
 
     std::cout << "\tSquare\n";
-    geometric_shapes::square squ_1({ 1,1 }, { 4,4 });
-    geometric_shapes::square squ_2({ 0,-2 }, { 10,0 });
-
+    square squ_1({ 1,1 }, { 4,4 });
+    square squ_2({ 0,-2 }, { 1,0 });
 
     std::cout << "\tTriangle\n";
-    geometric_shapes::triangle trian_1({ 0,0 }, { 30,0 }, { 0,4 });
+    triangle trian_1({ 0,0 }, { 3,0 }, { 0,4 });
     
-    std::vector<point> SPV = cir_1.take_vertexes();
+    std::vector<shapes*> shapes_vector = { dynamic_cast<shapes*>(&squ_1),
+                                           dynamic_cast<shapes*>(&squ_2),
+                                           dynamic_cast<shapes*>(&trian_1) };
 
-    std::cout << SPV;
-}
+    for (auto i : shapes_vector) {
+        i->move({ 1,1 });
+    }
+
+    for (auto i : shapes_vector) {
+        std::vector<point> v_p = i->take_vertexes();
+        for (point P : v_p) {
+            std::cout << P;
+        }
+        std::cout << std::endl;
+    }
+};

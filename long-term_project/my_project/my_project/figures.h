@@ -22,9 +22,10 @@ namespace geometric_shapes {
 		virtual bool is_point_inside(point p_t) = 0;
 		virtual void move(point rad_vec) = 0;
 		virtual bool is_intersection(square& sq) { return 0; };
-		virtual bool is_intersection(circle& sq) { return 0; };
-		virtual bool is_intersection(triangle& sq) { return 0; };
+		virtual bool is_intersection(circle& cir) { return 0; };
+		virtual bool is_intersection(triangle& trian) { return 0; };
 		virtual std::vector<point> take_vertexes() { return {}; };
+
 	};
 
 	class triangle: public virtual shapes
