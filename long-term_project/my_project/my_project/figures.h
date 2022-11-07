@@ -6,16 +6,18 @@
 
 namespace geometric_shapes {
 
+	class shapes;
 	class triangle;
 	class circle;
 	class square;
 	
 	double oblique_multiplication(point p_1, point p_2, point p_3);
 	bool is_cross(point p_1, point p_2, point p_3, point p_4);
+	
+	std::ostream& print(std::ostream& out_stream, shapes& shape);
 
 	class shapes 
 	{
-
 	public:
 		virtual double area() = 0;
 		virtual double perimeter() = 0;
@@ -26,6 +28,10 @@ namespace geometric_shapes {
 		virtual bool is_intersection(triangle& trian) { return 0; };
 		virtual std::vector<point> take_vertexes() { return {}; };
 
+
+		friend std::ostream& operator << (std::ostream& out_stream, shapes& shape) {
+			return print(out_stream, shape);
+		}
 	};
 
 	class triangle: public virtual shapes
@@ -52,7 +58,7 @@ namespace geometric_shapes {
 		bool is_intersection(triangle& tr);
 		bool is_intersection(circle& circ);
 
-		friend std::ostream& operator << (std::ostream& out_stream, triangle& tr) {
+		std::ostream& print(std::ostream& out_stream, triangle& tr) {
 
 			std::vector<point> TrianPointsVector = tr.take_vertexes();
 			for (auto i : TrianPointsVector) {
@@ -87,7 +93,7 @@ namespace geometric_shapes {
 		bool is_intersection(triangle& tr);
 		bool is_intersection(circle& circ);
 
-		friend std::ostream& operator << (std::ostream& out_stream, const circle& cir) {
+		std::ostream& print(std::ostream& out_stream, circle& cir) {
 			out_stream << "Central point: " << cir.centre_point << "\nRadius: " << cir.radius;
 			return out_stream;
 		}
@@ -122,7 +128,7 @@ namespace geometric_shapes {
 		bool is_intersection(triangle& tr);
 		bool is_intersection(square& sq);
 
-		friend std::ostream& operator << (std::ostream& out_stream, square& sq) {
+		std::ostream& print(std::ostream& out_stream, square& sq) {
 			std::vector<point> SquarePointsVector = sq.take_vertexes();
 			for (auto i : SquarePointsVector) {
 				out_stream << i << " ";

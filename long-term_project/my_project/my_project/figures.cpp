@@ -1,5 +1,7 @@
 #include "figures.h"
 
+using namespace geometric_shapes;
+
 double geometric_shapes::oblique_multiplication(point p_1, point p_2, point p_3)
 {
 	return (p_2 - p_1).x * (p_3 - p_1).y - (p_2 - p_1).y * (p_3 - p_1).x;
@@ -13,7 +15,7 @@ bool geometric_shapes::is_cross(point p_1, point p_2, point p_3, point p_4)
 }
 
 
-void geometric_shapes::triangle::move(point rad_vec) {
+void triangle::move(point rad_vec) {
     vertex_first += rad_vec;
     vertex_second += rad_vec;
     vertex_third += rad_vec;
@@ -25,7 +27,7 @@ std::vector<point> geometric_shapes::triangle::take_vertexes() {
     else return { vertex_first, vertex_second, vertex_third };
 }
 
-double geometric_shapes::triangle::perimeter() {
+double triangle::perimeter() {
     double size_12, size_23, size_13;
     size_12 = (vertex_first - vertex_second).distance();
 
@@ -34,7 +36,7 @@ double geometric_shapes::triangle::perimeter() {
     size_13 = (vertex_first - vertex_third).distance();
     return size_12 + size_23 + size_13;
 }
-double geometric_shapes::triangle::area() {
+double triangle::area() {
     double size_12, size_23, size_13;
     size_12 = (vertex_first - vertex_second).distance();
 
@@ -47,7 +49,7 @@ double geometric_shapes::triangle::area() {
     return sqrt(p * (p - size_12) * (p - size_23) * (p - size_13));
 }
 
-bool geometric_shapes::triangle::is_point_inside(point p_t) {
+bool triangle::is_point_inside(point p_t) {
     triangle tr1(vertex_first, vertex_second, p_t);
     triangle tr2(vertex_second, vertex_third, p_t);
     triangle tr3(vertex_first, vertex_third, p_t);
@@ -55,7 +57,7 @@ bool geometric_shapes::triangle::is_point_inside(point p_t) {
         return 1;
     else return 0;
 }
-bool geometric_shapes::triangle::is_intersection(square& sq)
+bool triangle::is_intersection(square& sq)
 {
     std::vector<point> SquarePointsVector = sq.take_vertexes();
     std::vector<point> TrianPointsVector = take_vertexes();
@@ -75,7 +77,7 @@ bool geometric_shapes::triangle::is_intersection(square& sq)
     }
     return 0;
 }
-bool geometric_shapes::triangle::is_intersection(triangle& tr)
+bool triangle::is_intersection(triangle& tr)
 {
     std::vector<point> TrianPointsVector1 = take_vertexes();
     std::vector<point> TrianPointsVector2 = tr.take_vertexes();
@@ -97,7 +99,7 @@ bool geometric_shapes::triangle::is_intersection(triangle& tr)
     }
     return 0;
 }
-bool geometric_shapes::triangle::is_intersection(circle& circ)
+bool triangle::is_intersection(circle& circ)
 {
     std::vector<point> TrianPointsVector = take_vertexes();
     for (auto i : TrianPointsVector) {
@@ -121,31 +123,31 @@ bool geometric_shapes::triangle::is_intersection(circle& circ)
 #define M_PI 3.1415
 
 
-void geometric_shapes::circle::move(point rad_vec) {
+void circle::move(point rad_vec) {
     centre_point += rad_vec;
 }
-point geometric_shapes::circle::central_point() {
+point circle::central_point() {
     return { centre_point };
 }
 
-double geometric_shapes::circle::area() {
+double circle::area() {
     return M_PI * radius * radius;
 }
-double geometric_shapes::circle::perimeter() {
+double circle::perimeter() {
     return 2 * M_PI * radius;
 }
 
 
-bool geometric_shapes::circle::is_point_inside(point p_t) {
+bool circle::is_point_inside(point p_t) {
     if ((centre_point- p_t).distance() <= radius)
         return 1;
     else return 0;
 }
-bool geometric_shapes::circle::is_intersection(circle& circ) {
+bool circle::is_intersection(circle& circ) {
     geometric_shapes::circle t_cir(centre_point, radius + circ.radius);
     return t_cir.is_point_inside(circ.centre_point);
 }
-bool geometric_shapes::circle::is_intersection(square& sq) {
+bool circle::is_intersection(square& sq) {
     std::vector<point> SquarePointsVector = sq.take_vertexes();
     
     for (auto i : SquarePointsVector) {
@@ -163,19 +165,19 @@ bool geometric_shapes::circle::is_intersection(square& sq) {
     }
     return 0;
 }
-bool geometric_shapes::circle::is_intersection(triangle& tr)
+bool circle::is_intersection(triangle& tr)
 {
     return tr.is_intersection(*this);
 }
 
 
 
-void geometric_shapes::square::move(point rad_vec) {
+void square::move(point rad_vec) {
     vertex_first += rad_vec;
     vertex_third += rad_vec;
 }
 
-std::vector<point> geometric_shapes::square::take_vertexes() {
+std::vector<point> square::take_vertexes() {
     return {
         vertex_first,
         {0.5 * (vertex_third.x + vertex_first.x + vertex_first.y - vertex_third.y),
@@ -186,14 +188,14 @@ std::vector<point> geometric_shapes::square::take_vertexes() {
     };
 }
 
-double geometric_shapes::square::area() {
+double square::area() {
     return 0.5 * (pow((vertex_first - vertex_third).distance(), 2));
 }
-double geometric_shapes::square::perimeter() {
+double square::perimeter() {
     return 4 * sqrt(area());
 }
 
-bool geometric_shapes::square::is_point_inside(point p_t) {
+bool square::is_point_inside(point p_t) {
     std::vector<point> SquarePointsVector = take_vertexes();
     triangle sq1({ SquarePointsVector[0], SquarePointsVector[1], p_t});
     triangle sq2({ SquarePointsVector[2], SquarePointsVector[1], p_t});
@@ -203,16 +205,16 @@ bool geometric_shapes::square::is_point_inside(point p_t) {
         return 1;
     else return 0;
 }
-bool geometric_shapes::square::is_intersection(circle& circ)
+bool square::is_intersection(circle& circ)
 {
     return circ.is_intersection(*this);
 }
-bool geometric_shapes::square::is_intersection(triangle& tr)
+bool square::is_intersection(triangle& tr)
 {
     return tr.is_intersection(*this);
 
 }
-bool geometric_shapes::square::is_intersection(square& sq) {
+bool square::is_intersection(square& sq) {
     std::vector<point> SquarePointsVector1 = take_vertexes();
     std::vector<point> SquarePointsVector2 = sq.take_vertexes();
 

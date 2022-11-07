@@ -15,6 +15,8 @@ int main()
 
     std::cout << "\tTriangle\n";
     triangle trian_1({ 0,0 }, { 3,0 }, { 0,4 });
+
+    
     
     std::vector<shapes*> shapes_vector = { dynamic_cast<shapes*>(&squ_1),
                                            dynamic_cast<shapes*>(&squ_2),
@@ -23,12 +25,8 @@ int main()
     for (auto i : shapes_vector) {
         i->move({ 1,1 });
     }
-
     for (auto i : shapes_vector) {
-        std::vector<point> v_p = i->take_vertexes();
-        for (point P : v_p) {
-            std::cout << P;
-        }
-        std::cout << std::endl;
+        //std::cout << *i << std::endl;
     }
+    
 };
