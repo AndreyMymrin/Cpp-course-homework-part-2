@@ -9,35 +9,50 @@ public:
     std::string name;
     std::string familia;
     std::string otchectvo;
+    void print() {
+        std::cout << year_of_birth << " " << year_of_graduation_sch << " " << year_of_entry_inst << " " 
+            << year_of_graduation_inst << "\n" << name << " " << familia << " " << otchectvo << "\n";
 
-    std::vector<std::string> errors_vect;
-    
+    }
 };
-std::string create(int Y_Bth, int Y_GrSch, int Y_Entr, int Y_GrInst,
+
+
+std::vector<student> add(std::vector<student>* vect, int Y_Bth, int Y_GrSch, int Y_Entr, int Y_GrInst,
         std::string name, std::string familia, std::string otchectvo) {
     try{
-        student Stud;
+        
         if (Y_Bth < Y_GrSch && Y_GrSch <= Y_Entr && Y_Entr < Y_GrInst) {
+            student Stud;
+
             Stud.year_of_birth = Y_Bth;
             Stud.year_of_graduation_sch = Y_GrSch;
             Stud.year_of_entry_inst = Y_Entr;
-            Stud.year_of_entry_inst = Y_GrInst;
+            Stud.year_of_graduation_inst = Y_GrInst;
             Stud.name = name;
             Stud.familia = familia;
             Stud.otchectvo = otchectvo;
+
+            vect->push_back(Stud);
         }
         else {
             throw "error";
         }
     }
     
-    catch (...) { std::cout << "er\n"; }
-    return "Hmmmmm";
+    catch (...) { std::cout << "error\n"; }
+    return *vect;
 }
 
 int main()
 {
-    create(2002, 2004, 2006, 4003, "Andrey", "Mymrin", "Penrovich");
+    std::vector<student>* vect_stud;
+    vect_stud =  new std::vector<student>;
+    add(vect_stud, 2002, 2004, 2006, 4003, "Andrey", "Mymrin", "Penrovich");
+    add(vect_stud, 2, 3, 4, 5, "Andre", "Mym", "Penro");
+
+    for (student i : *vect_stud) {
+        i.print();
+    }
 
     return 0;
 }

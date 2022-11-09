@@ -27,6 +27,7 @@ int main()
     }
     for (auto i : shapes_vector) {
         std::cout << *i << std::endl;
+
         /*std::vector<point> VP = i->take_vertexes();
         for (auto j : VP) {
             std::cout << j;
