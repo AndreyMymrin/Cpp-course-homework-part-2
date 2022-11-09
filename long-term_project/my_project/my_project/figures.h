@@ -58,9 +58,9 @@ namespace geometric_shapes {
 		bool is_intersection(triangle& tr);
 		bool is_intersection(circle& circ);
 
-		std::ostream& print(std::ostream& out_stream, triangle& tr) {
-
-			std::vector<point> TrianPointsVector = tr.take_vertexes();
+		std::ostream& print(std::ostream& out_stream, shapes& shape) {
+			triangle* tr = dynamic_cast<triangle*>(&shape);
+			std::vector<point> TrianPointsVector = tr->take_vertexes();
 			for (auto i : TrianPointsVector) {
 				out_stream << i << " ";
 			}
@@ -93,8 +93,9 @@ namespace geometric_shapes {
 		bool is_intersection(triangle& tr);
 		bool is_intersection(circle& circ);
 
-		std::ostream& print(std::ostream& out_stream, circle& cir) {
-			out_stream << "Central point: " << cir.centre_point << "\nRadius: " << cir.radius;
+		std::ostream& print(std::ostream& out_stream, shapes& shape) {
+			circle* cir = dynamic_cast<circle*>(&shape);
+			out_stream << "Central point: " << cir->centre_point << "\nRadius: " << cir->radius;
 			return out_stream;
 		}
 		friend std::istream& operator >> (std::istream& in_stream, circle& cir) {
@@ -128,8 +129,9 @@ namespace geometric_shapes {
 		bool is_intersection(triangle& tr);
 		bool is_intersection(square& sq);
 
-		std::ostream& print(std::ostream& out_stream, square& sq) {
-			std::vector<point> SquarePointsVector = sq.take_vertexes();
+		std::ostream& print(std::ostream& out_stream, shapes& shape) {
+			square* sq = dynamic_cast<square*>(&shape);
+			std::vector<point> SquarePointsVector = sq->take_vertexes();
 			for (auto i : SquarePointsVector) {
 				out_stream << i << " ";
 			}

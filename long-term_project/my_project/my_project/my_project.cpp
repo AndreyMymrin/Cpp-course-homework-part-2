@@ -26,7 +26,12 @@ int main()
         i->move({ 1,1 });
     }
     for (auto i : shapes_vector) {
-        //std::cout << *i << std::endl;
+        std::cout << *i << std::endl;
+        /*std::vector<point> VP = i->take_vertexes();
+        for (auto j : VP) {
+            std::cout << j;
+        }
+        std::cout << std::endl;*/
     }
     
 };
