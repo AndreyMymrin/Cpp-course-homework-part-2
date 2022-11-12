@@ -19,27 +19,44 @@ public:
 
 std::vector<student> add(std::vector<student>* vect, int Y_Bth, int Y_GrSch, int Y_Entr, int Y_GrInst,
         std::string name, std::string familia, std::string otchectvo) {
-    try{
-        
-        if (Y_Bth < Y_GrSch && Y_GrSch <= Y_Entr && Y_Entr < Y_GrInst) {
-            student Stud;
-
+    try {
+        int counter = 1;
+        student Stud;
+        if (Y_Bth < Y_GrSch && Y_GrSch <= Y_Entr && Y_Entr < Y_GrInst && counter != 0) {
             Stud.year_of_birth = Y_Bth;
             Stud.year_of_graduation_sch = Y_GrSch;
             Stud.year_of_entry_inst = Y_Entr;
             Stud.year_of_graduation_inst = Y_GrInst;
-            Stud.name = name;
-            Stud.familia = familia;
-            Stud.otchectvo = otchectvo;
-
-            vect->push_back(Stud);
         }
         else {
-            throw "error";
+            throw (std::string)"years error";
+            counter *= 0;
         }
+        if (65 <= (int)name[0] && (int)name[0] <= 90 && counter != 0) {
+            Stud.name = name;
+        }
+        else {
+            
+            throw (std::string)"Error at name " + name;
+            counter *= 0;
+        }
+        if (65 <= (int)familia[0] && (int)familia[0] <= 90 && counter != 0) {
+            Stud.familia = familia;
+        }
+        else {
+            throw (std::string)"Error at familia " + familia;
+            counter *= 0;
+        }
+        if (65 <= (int)otchectvo[0] && (int)otchectvo[0] <= 90 && counter != 0) {
+            Stud.otchectvo = otchectvo;
+        }
+        else {
+            throw (std::string)"Error at othestvo" + otchectvo;
+            counter *= 0;
+        }
+        if (counter != 0) { vect->push_back(Stud); }
     }
-    
-    catch (...) { std::cout << "error\n"; }
+    catch (std::string str) { std::cout << str << std::endl; }
     return *vect;
 }
 
@@ -47,8 +64,8 @@ int main()
 {
     std::vector<student>* vect_stud;
     vect_stud =  new std::vector<student>;
-    add(vect_stud, 2002, 2004, 2006, 4003, "Andrey", "Mymrin", "Penrovich");
-    add(vect_stud, 2, 3, 4, 5, "Andre", "Mym", "Penro");
+    add(vect_stud, 2002, 2004, 2006, 4003, "Andrey", "Mymrin", "Petrovich");
+    add(vect_stud, 2, 3, 4, 5, "andre", "Mym", "Petro");
 
     for (student i : *vect_stud) {
         i.print();
