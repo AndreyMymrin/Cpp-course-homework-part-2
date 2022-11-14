@@ -20,19 +20,14 @@ int main()
     
     std::vector<shapes*> shapes_vector = { dynamic_cast<shapes*>(&squ_1),
                                            dynamic_cast<shapes*>(&squ_2),
-                                           dynamic_cast<shapes*>(&trian_1) };
+                                           dynamic_cast<shapes*>(&trian_1),
+                                           dynamic_cast<shapes*>(&cir_1)};
 
     for (auto i : shapes_vector) {
         i->move({ 1,1 });
     }
     for (auto i : shapes_vector) {
         std::cout << *i << std::endl;
-        
-        /*std::vector<point> VP = i->take_vertexes();
-        for (auto j : VP) {
-            std::cout << j;
-        }
-        std::cout << std::endl;*/
     }
     
 };

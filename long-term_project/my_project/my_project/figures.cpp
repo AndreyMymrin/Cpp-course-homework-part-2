@@ -14,12 +14,6 @@ bool geometric_shapes::is_cross(point p_1, point p_2, point p_3, point p_4)
 	else return 0;
 }
 
-std::ostream& geometric_shapes::print(std::ostream& out_stream, shapes& shape)
-{
-    out_stream << "Aaaaaa";
-    return out_stream;
-}
-
 
 void triangle::move(point rad_vec) {
     vertex_first += rad_vec;

@@ -13,8 +13,6 @@ namespace geometric_shapes {
 	
 	double oblique_multiplication(point p_1, point p_2, point p_3);
 	bool is_cross(point p_1, point p_2, point p_3, point p_4);
-	
-	std::ostream& print(std::ostream& out_stream, shapes& shape);
 
 	class shapes 
 	{
@@ -27,10 +25,11 @@ namespace geometric_shapes {
 		virtual bool is_intersection(circle& cir) { return 0; };
 		virtual bool is_intersection(triangle& trian) { return 0; };
 		virtual std::vector<point> take_vertexes() { return {}; };
-
+		virtual std::ostream& print(std::ostream& out_stream, shapes& shape) { 
+			return out_stream; 
+		};
 		friend std::ostream& operator << (std::ostream& out_stream, shapes& shape) {
-			
-			return print(out_stream, shape);
+			return shape.print(out_stream, shape);
 		}
 	};
 
@@ -58,7 +57,7 @@ namespace geometric_shapes {
 		bool is_intersection(triangle& tr);
 		bool is_intersection(circle& circ);
 
-		std::ostream& print(std::ostream& out_stream, triangle& shape) {
+		std::ostream& print(std::ostream& out_stream, shapes& shape) {
 			triangle* tr = dynamic_cast<triangle*>(&shape);
 			std::vector<point> TrianPointsVector = tr->take_vertexes();
 			for (auto i : TrianPointsVector) {
