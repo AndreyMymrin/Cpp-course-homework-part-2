@@ -118,7 +118,16 @@ bool triangle::is_intersection(circle& circ)
     return 0;
 }
 
-
+std::ostream& geometric_shapes::triangle::print(std::ostream& out_stream, shapes& shape)
+{
+    triangle* tr = dynamic_cast<triangle*>(&shape);
+    std::vector<point> TrianPointsVector = tr->take_vertexes();
+    out_stream << "Triangle: ";
+    for (auto i : TrianPointsVector) {
+        out_stream << i << " ";
+    }
+    return out_stream;
+}
 
 #define M_PI 3.1415
 
@@ -146,6 +155,12 @@ bool circle::is_point_inside(point p_t) {
 bool circle::is_intersection(circle& circ) {
     geometric_shapes::circle t_cir(centre_point, radius + circ.radius);
     return t_cir.is_point_inside(circ.centre_point);
+}
+std::ostream& geometric_shapes::circle::print(std::ostream& out_stream, shapes& shape)
+{
+    circle* cir = dynamic_cast<circle*>(&shape);
+    out_stream << "Circle:\nCentral point: " << cir->centre_point << "\nRadius: " << cir->radius;
+    return out_stream;
 }
 bool circle::is_intersection(square& sq) {
     std::vector<point> SquarePointsVector = sq.take_vertexes();
@@ -234,4 +249,15 @@ bool square::is_intersection(square& sq) {
         }
     }
     return 0;
+}
+
+std::ostream& geometric_shapes::square::print(std::ostream& out_stream, shapes& shape)
+{
+    square* sq = dynamic_cast<square*>(&shape);
+    std::vector<point> SquarePointsVector = sq->take_vertexes();
+    out_stream << "Square: ";
+    for (auto i : SquarePointsVector) {
+        out_stream << i << " ";
+    }
+    return out_stream;
 }
