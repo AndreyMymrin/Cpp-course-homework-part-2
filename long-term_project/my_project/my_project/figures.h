@@ -28,8 +28,8 @@ namespace geometric_shapes {
 		virtual bool is_intersection(triangle& trian) { return 0; };
 		virtual std::vector<point> take_vertexes() { return {}; };
 
-
 		friend std::ostream& operator << (std::ostream& out_stream, shapes& shape) {
+			
 			return print(out_stream, shape);
 		}
 	};
@@ -58,7 +58,7 @@ namespace geometric_shapes {
 		bool is_intersection(triangle& tr);
 		bool is_intersection(circle& circ);
 
-		std::ostream& print(std::ostream& out_stream, shapes& shape) {
+		std::ostream& print(std::ostream& out_stream, triangle& shape) {
 			triangle* tr = dynamic_cast<triangle*>(&shape);
 			std::vector<point> TrianPointsVector = tr->take_vertexes();
 			for (auto i : TrianPointsVector) {
