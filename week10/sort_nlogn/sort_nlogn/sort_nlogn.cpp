@@ -62,16 +62,16 @@ int main()
     srand(time(NULL));
 
     const int n = 10;
-    std::string a[n];
-
+    //std::string a[n];
+    int* a = new int[n];
     for (int i = 0; i < n; i++)
     {
-        a[i] = std::string(rand() % 9 +1, 'A');
-        //a[i] = pow(-1,rand())*(rand() % 100);
+        //a[i] = std::string(rand() % 9 +1, 'A');
+        a[i] = pow(-1,rand())*(rand() % 100);
     }
     print(&a[0], n);
 
-    qsort<std::string>(a);
+    //qsort<int>(a);
 
     print(&a[0], n);
 
