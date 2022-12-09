@@ -23,30 +23,6 @@ public:
 
 };
 
-template<class T, int wide, int size>
-class matrix<T,wide,size> {
-public:
-    T Matr[wide][size];
-    /*T take(int first, int size) {
-        return Matr[size][first];
-    }*/
-    matrix<T,wide, size> operator + (matrix<T, wide, size >Matr2) {
-        for (int i = 0; i < wide; i++) {
-            for (int j = 0; j < size; j++) {
-                Matr[i][j] += Matr2.Matr[i][j];
-            }
-        }
-        return *this;
-    }
-    matrix<T, wide, size> operator - (matrix<T, wide, size >Matr2) {
-        for (int i = 0; i < wide; i++) {
-            for (int j = 0; j < size; j++) {
-                Matr[i][j] -= Matr2.Matr[i][j];
-            }
-        }
-        return *this;
-    }
-};
 template<class T,int size>
 class matrix<T, size> {
 public:
@@ -75,15 +51,7 @@ void rand_add(matrix<T,first_dimention, size... >& MomMatr) {
         rand_add(MomMatr.Matr[i]);
     }
 }
-template<class T, int wide, int size>
-void rand_add(matrix<T, wide, size>& MomMatr) {
 
-    for (int i = 0; i < wide; i++) {
-        for (int j = 0; j < size; j++) {
-            MomMatr.Matr[i][j] = rand() % 100;
-        }
-    }
-}
 
 template<class T, int size>
 void rand_add(matrix<T, size>& MomMatr) {
@@ -94,24 +62,10 @@ void rand_add(matrix<T, size>& MomMatr) {
 
 template <class T, int first_dimention, int ... size>
 void print(matrix<T, first_dimention, size... >& MomMatr) {
-    std::cout << "\tMatrix:\n";
+    std::cout << "\t\n";
     for (int i = 0; i < first_dimention; i++) {
         print(MomMatr.Matr[i]);
-        std::cout << "\n";
     }
-}
-
-template<class T, int wide, int size>
-void print(matrix<T, wide, size>& MomMatr) {
-    for (int i = 0; i < size; i++) {
-        std::cout << "|";
-        for (int j = 0; j < wide; j++) {
-            std::cout.width(3);
-            std::cout << MomMatr.Matr[j][i] << " ";
-        }
-        std::cout << "|\n";
-    }
-    std::cout << "\n";
 }
 
 template<class T,int size>
@@ -122,5 +76,4 @@ void print(matrix<T,size>& MomMatr) {
         std::cout << MomMatr.Matr[j] << " ";
     }
     std::cout << "|\n";
-    std::cout << "\n";
 }
