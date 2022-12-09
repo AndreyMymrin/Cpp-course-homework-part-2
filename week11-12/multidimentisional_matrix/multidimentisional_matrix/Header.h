@@ -47,6 +47,27 @@ public:
         return *this;
     }
 };
+template<class T,int size>
+class matrix<T, size> {
+public:
+    T Matr[size];
+    /*T take(int first, int size) {
+        return Matr[size][first];
+    }*/
+    matrix<T,size> operator + (matrix<T, size >Matr2) {
+        for (int j = 0; j < size; j++) {
+            Matr[j] += Matr2.Matr[j];
+        }
+        return *this;
+    }
+    matrix<T,size> operator - (matrix<T, size >Matr2) {
+        for (int j = 0; j < size; j++) {
+            Matr[j] -= Matr2.Matr[j];
+        }
+        
+        return *this;
+    }
+};
 
 template <class T, int first_dimention, int ... size>
 void rand_add(matrix<T,first_dimention, size... >& MomMatr) {
@@ -61,6 +82,13 @@ void rand_add(matrix<T, wide, size>& MomMatr) {
         for (int j = 0; j < size; j++) {
             MomMatr.Matr[i][j] = rand() % 100;
         }
+    }
+}
+
+template<class T, int size>
+void rand_add(matrix<T, size>& MomMatr) {
+    for (int j = 0; j < size; j++) {
+        MomMatr.Matr[j] = rand() % 100;
     }
 }
 
@@ -83,5 +111,16 @@ void print(matrix<T, wide, size>& MomMatr) {
         }
         std::cout << "|\n";
     }
+    std::cout << "\n";
+}
+
+template<class T,int size>
+void print(matrix<T,size>& MomMatr) {
+    std::cout << "|";
+    for (int j = 0; j < size; j++) {
+        std::cout.width(3);
+        std::cout << MomMatr.Matr[j] << " ";
+    }
+    std::cout << "|\n";
     std::cout << "\n";
 }
