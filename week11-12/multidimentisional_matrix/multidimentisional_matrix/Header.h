@@ -20,15 +20,14 @@ public:
         }
         return *this;
     }
-
 };
 
 template<class T,int size>
 class matrix<T, size> {
 public:
     T Matr[size];
-    /*T take(int first, int size) {
-        return Matr[size][first];
+    /*T take(int size) {
+        return Matr[size];
     }*/
     matrix<T,size> operator + (matrix<T, size >Matr2) {
         for (int j = 0; j < size; j++) {
@@ -40,7 +39,6 @@ public:
         for (int j = 0; j < size; j++) {
             Matr[j] -= Matr2.Matr[j];
         }
-        
         return *this;
     }
 };
@@ -51,7 +49,6 @@ void rand_add(matrix<T,first_dimention, size... >& MomMatr) {
         rand_add(MomMatr.Matr[i]);
     }
 }
-
 
 template<class T, int size>
 void rand_add(matrix<T, size>& MomMatr) {
